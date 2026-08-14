@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#111827">
+  <title>Ayu Study Tracker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">A</div>
+      <div>
+        <h1>Ayu Study Tracker</h1>
+        <p>Class 9 • Simple daily preparation planner</p>
+      </div>
+    </div>
+    <button id="themeBtn" class="ghost">☀️ Light</button>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <h2>Your Study Dashboard</h2>
+      <p>Track chapters, set targets and keep your preparation organised.</p>
+    </section>
+
+    <section class="card setup">
+      <h2>Student Details</h2>
+      <div class="grid">
+        <label>Student name
+          <input id="studentName" placeholder="e.g. Ayush">
+        </label>
+        <label>Class
+          <select id="studentClass">
+            <option>Class 9</option>
+            <option>Class 10</option>
+          </select>
+        </label>
+        <label>Exam date
+          <input id="examDate" type="date">
+        </label>
+      </div>
+      <button id="saveProfile" class="primary">Save Details</button>
+    </section>
+
+    <section class="stats">
+      <div class="stat"><b id="totalCount">0</b><span>Total topics</span></div>
+      <div class="stat"><b id="doneCount">0</b><span>Completed</span></div>
+      <div class="stat"><b id="progressCount">0%</b><span>Progress</span></div>
+      <div class="stat"><b id="todayCount">0</b><span>Done today</span></div>
+    </section>
+
+    <section class="card">
+      <div class="sectionHead">
+        <div>
+          <h2>My Study Topics</h2>
+          <p id="welcome">Add your first topic below.</p>
+        </div>
+        <select id="filter">
+          <option value="all">All</option>
+          <option value="todo">Not done</option>
+          <option value="done">Completed</option>
+        </select>
+      </div>
+
+      <div class="addRow">
+        <select id="subject">
+          <option>Mathematics</option>
+          <option>Science</option>
+          <option>English</option>
+          <option>Social Science</option>
+          <option>Hindi</option>
+          <option>Computer</option>
+        </select>
+        <input id="topic" placeholder="Topic / chapter name">
+        <button id="addBtn" class="primary">+ Add</button>
+      </div>
+
+      <div id="topicList" class="topicList"></div>
+    </section>
+
+    <section class="card">
+      <h2>Daily Target</h2>
+      <div class="targetBox">
+        <input id="targetInput" type="number" min="1" max="20" value="3">
+        <span>topics per day</span>
+        <button id="saveTarget" class="primary">Save Target</button>
+      </div>
+      <div class="progress"><div id="bar"></div></div>
+      <p id="targetText">0 / 3 completed today</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made by <strong>Technical Ayu</strong> • Ayu Study Tracker</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

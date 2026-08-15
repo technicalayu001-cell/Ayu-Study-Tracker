@@ -1,268 +1,1556 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Ayu Study Tracker</title>
+<meta charset="UTF-8">
 
-  <meta name="description"
-        content="Technical Ayu Study Tracker - Class 9 daily study planner">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-  <link rel="stylesheet" href="style.css">
+<title>Technical Ayu - Study Tracker</title>
+
+<style>
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:Arial, sans-serif;
+}
+
+body{
+  background:#0f172a;
+  color:#f8fafc;
+  min-height:100vh;
+}
+
+.container{
+  width:95%;
+  max-width:1100px;
+  margin:auto;
+  padding:20px 0 50px;
+}
+
+header{
+  background:#1e293b;
+  padding:25px;
+  border-radius:20px;
+  margin-bottom:20px;
+  text-align:center;
+}
+
+header h1{
+  font-size:30px;
+  margin-bottom:8px;
+}
+
+header p{
+  color:#cbd5e1;
+}
+
+.card{
+  background:#1e293b;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:20px;
+}
+
+.card h2{
+  margin-bottom:15px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:15px;
+}
+
+label{
+  display:block;
+  margin-bottom:7px;
+  color:#cbd5e1;
+}
+
+input,select,button{
+  width:100%;
+  padding:12px;
+  border-radius:10px;
+  border:1px solid #475569;
+  background:#0f172a;
+  color:white;
+  font-size:15px;
+}
+
+button{
+  cursor:pointer;
+  border:none;
+  background:#2563eb;
+  font-weight:bold;
+}
+
+button:hover{
+  opacity:.9;
+}
+
+.exam-box{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+  gap:12px;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:12px;
+}
+
+.stat{
+  background:#0f172a;
+  padding:18px;
+  border-radius:15px;
+  text-align:center;
+}
+
+.stat strong{
+  display:block;
+  font-size:25px;
+  margin-top:8px;
+}
+
+.progress-area{
+  margin-top:15px;
+}
+
+.progress-bg{
+  width:100%;
+  height:20px;
+  background:#334155;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:#22c55e;
+  transition:.3s;
+}
+
+.progress-text{
+  text-align:center;
+  margin-top:8px;
+  font-weight:bold;
+}
+
+.subject{
+  background:#0f172a;
+  border-radius:15px;
+  margin-bottom:15px;
+  overflow:hidden;
+}
+
+.subject-header{
+  padding:16px;
+  background:#334155;
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+}
+
+.chapter{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  padding:13px 16px;
+  border-top:1px solid #334155;
+  margin:0;
+  cursor:pointer;
+}
+
+.chapter input{
+  width:auto;
+}
+
+.chapter.completed{
+  text-decoration:line-through;
+  opacity:.55;
+}
+
+.resource{
+  background:#0f172a;
+  padding:15px;
+  border-radius:14px;
+  margin-bottom:10px;
+}
+
+.resource a{
+  display:inline-block;
+  margin-top:10px;
+  text-decoration:none;
+  background:#2563eb;
+  color:white;
+  padding:10px 15px;
+  border-radius:8px;
+}
+
+footer{
+  text-align:center;
+  color:#94a3b8;
+  padding:20px;
+}
+
+.danger{
+  background:#dc2626;
+}
+
+.small{
+  font-size:13px;
+  color:#94a3b8;
+  margin-top:8px;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<header class="topbar">
+<div class="container">
 
-  <div class="brand">
+<header>
 
-    <div class="logo">A</div>
+<h1>📚 Technical Ayu Study Tracker</h1>
 
-    <div>
-      <h1>Ayu Study Tracker</h1>
-      <p>Class 9 • Smart Study Planner</p>
-    </div>
-
-  </div>
-
-  <button id="themeBtn" class="theme-btn">
-    ☀️ Light
-  </button>
+<p>Class 9 & Class 10 • Half-Yearly & Final Exam</p>
 
 </header>
 
 
-<main class="container">
+<!-- STUDENT SETTINGS -->
 
-  <section class="hero">
+<div class="card">
 
-    <h2>Your Study Dashboard</h2>
+<h2>👤 Student Details</h2>
 
-    <p>
-      Track your chapters, daily targets and study progress
-      in one simple place.
-    </p>
+<div class="grid">
 
-  </section>
+<div>
+<label>Name</label>
+<input id="studentName"
+placeholder="Technical Ayu">
+</div>
 
+<div>
+<label>Class</label>
 
-  <!-- STUDENT DETAILS -->
+<select id="studentClass">
 
-  <section class="card">
+<option>Class 9</option>
+<option>Class 10</option>
 
-    <h2>👨‍🎓 Student Details</h2>
+</select>
 
-    <label>Student Name</label>
+</div>
 
-    <input
-      id="studentName"
-      type="text"
-      placeholder="Enter your name"
-    >
+<div>
+<label>Daily Study Target (minutes)</label>
 
-    <label>Class</label>
+<input id="dailyTarget"
+type="number"
+value="120">
 
-    <select id="studentClass">
+</div>
 
-      <option value="Class 9">Class 9</option>
-      <option value="Class 10">Class 10</option>
+</div>
 
-    </select>
+<br>
 
-    <label>Daily Study Target (minutes)</label>
+<button id="saveDetails">
+💾 Save Details
+</button>
 
-    <input
-      id="dailyTarget"
-      type="number"
-      min="1"
-      placeholder="Example: 120"
-    >
+</div>
 
-    <button id="saveDetails" class="primary-btn">
-      Save Details
-    </button>
 
-  </section>
+<!-- EXAM PLANNER -->
 
+<div class="card">
 
-  <!-- STATS -->
+<h2>📅 Exam Planner</h2>
 
-  <section class="stats">
+<div class="exam-box">
 
-    <div class="stat-card">
+<div>
 
-      <span>📚</span>
+<label>Exam</label>
 
-      <h3 id="totalChapters">0</h3>
+<select id="examType">
 
-      <p>Total Chapters</p>
+<option>Half-Yearly</option>
+<option>Final</option>
 
-    </div>
+</select>
 
+</div>
 
-    <div class="stat-card">
 
-      <span>✅</span>
+<div>
 
-      <h3 id="completedChapters">0</h3>
+<label>Half-Yearly Exam Date</label>
 
-      <p>Completed</p>
+<input
+id="halfYearlyDate"
+type="date">
 
-    </div>
+</div>
 
 
-    <div class="stat-card">
+<div>
 
-      <span>📊</span>
+<label>Final Exam Date</label>
 
-      <h3 id="progressPercent">0%</h3>
+<input
+id="finalDate"
+type="date">
 
-      <p>Progress</p>
+</div>
 
-    </div>
+</div>
 
-  </section>
+<p class="small">
+Half-Yearly में केवल selected half-yearly portion count होगा।
+Final में पूरा syllabus count होगा।
+</p>
 
+</div>
 
-  <!-- PROGRESS -->
 
-  <section class="card">
+<!-- EXAM STATS -->
 
-    <div class="section-title">
+<div class="card">
 
-      <div>
-        <h2>📊 Overall Progress</h2>
-        <p>Your Class 9 preparation progress</p>
-      </div>
+<h2>🎯 Current Exam Progress</h2>
 
-      <strong id="progressText">0%</strong>
+<div class="stats">
 
-    </div>
+<div class="stat">
+Current Exam
+<strong id="currentExam">Half-Yearly</strong>
+</div>
 
-    <div class="progress-bar">
+<div class="stat">
+Total Topics
+<strong id="totalChapters">0</strong>
+</div>
 
-      <div
-        id="progressBar"
-        class="progress-fill">
-      </div>
+<div class="stat">
+Completed
+<strong id="completedChapters">0</strong>
+</div>
 
-    </div>
+<div class="stat">
+Days Remaining
+<strong id="daysRemaining">—</strong>
+</div>
 
-  </section>
+<div class="stat">
+Required Rate
+<strong id="requiredRate">—</strong>
+</div>
 
+</div>
 
-  <!-- DAILY TARGET -->
 
-  <section class="card">
+<div class="progress-area">
 
-    <h2>🎯 Today's Study Target</h2>
+<div class="progress-bg">
 
-    <div class="target-box">
+<div
+id="progressBar"
+class="progress-bar">
+</div>
 
-      <div>
+</div>
 
-        <span id="targetDisplay">
-          0 minutes
-        </span>
+<div
+id="progressText"
+class="progress-text">
+0%
+</div>
 
-        <small>
-          Daily target
-        </small>
+</div>
 
-      </div>
+</div>
 
-      <div>
 
-        <span id="studyToday">
-          0 minutes
-        </span>
+<!-- STUDY TIME -->
 
-        <small>
-          Studied today
-        </small>
+<div class="card">
 
-      </div>
+<h2>⏱️ Today's Study</h2>
 
-    </div>
+<div class="stats">
 
+<div class="stat">
+Study Today
+<strong id="studyToday">
+0 minutes
+</strong>
+</div>
 
-    <label>Add Study Time (minutes)</label>
+<div class="stat">
+Daily Target
+<strong id="targetDisplay">
+120 minutes
+</strong>
+</div>
 
-    <input
-      id="studyMinutes"
-      type="number"
-      min="1"
-      placeholder="Example: 30"
-    >
+</div>
 
-    <button id="addStudy" class="primary-btn">
-      ➕ Add Study Time
-    </button>
+<br>
 
-  </section>
+<div class="grid">
 
+<input
+id="studyMinutes"
+type="number"
+placeholder="Study minutes">
 
-  <!-- SUBJECTS -->
+<button id="addStudy">
+➕ Add Study Time
+</button>
 
-  <section class="card">
+</div>
 
-    <div class="section-title">
+</div>
 
-      <div>
 
-        <h2>📚 Class 9 Subjects</h2>
+<!-- SYLLABUS -->
 
-        <p>
-          Mark chapters as completed
-        </p>
+<div class="card">
 
-      </div>
+<h2>
+📚 <span id="syllabusTitle">
+Half-Yearly Syllabus
+</span>
+</h2>
 
-    </div>
+<p class="small">
+Checkbox tick करने पर chapter/topic complete माना जाएगा।
+</p>
 
+<br>
 
-    <div id="subjects"></div>
+<div id="subjects"></div>
 
-  </section>
+</div>
 
 
-  <!-- RESET -->
+<!-- RESOURCES -->
 
-  <section class="card danger-card">
+<div class="card">
 
-    <h2>⚙️ Data Settings</h2>
+<h2>📖 NCERT Resources</h2>
 
-    <p>
-      Your data is stored locally in this browser.
-    </p>
+<p class="small">
+Official NCERT textbook pages. Book को tracker के अंदर ही पढ़ने के लिए नीचे Open Book दबाओ।
+</p>
 
-    <button id="resetBtn" class="danger-btn">
-      Reset All Data
-    </button>
+<br>
 
-  </section>
 
-</main>
+<div class="resource">
+
+<h3>🔬 Class 9 — Exploration</h3>
+
+<p class="small">
+NCERT Grade 9 Science
+</p>
+
+<a
+href="https://ncert.nic.in/textbook.php?iesc1=0-16"
+target="_blank">
+
+📖 Open Book
+
+</a>
+
+</div>
+
+
+<div class="resource">
+
+<h3>🌍 Class 9 — Exploring Society: India and Beyond</h3>
+
+<p class="small">
+NCERT Grade 9 Social Science
+</p>
+
+<a
+href="https://ncert.nic.in/textbook.php?gees1=gl-9"
+target="_blank">
+
+📖 Open Book
+
+</a>
+
+</div>
+
+
+<div class="resource">
+
+<h3>📐 NCERT Textbooks</h3>
+
+<a
+href="https://ncert.nic.in/textbook.php"
+target="_blank">
+
+📚 NCERT Textbook Portal
+
+</a>
+
+</div>
+
+</div>
+
+
+<!-- RESET -->
+
+<div class="card">
+
+<button
+id="resetBtn"
+class="danger">
+
+⚠️ Reset All Study Data
+
+</button>
+
+</div>
 
 
 <footer>
 
-  <h3>Technical Ayu</h3>
-
-  <p>
-    Built with ❤️ by Technical Ayu
-  </p>
-
-  <p class="copyright">
-    © 2026 Technical Ayu • Ayu Study Tracker
-  </p>
+Technical Ayu • Personal Study Tracker
 
 </footer>
 
+</div>
 
-<script src="app.js"></script>
+
+<script>
+
+/* =====================================================
+   SYLLABUS DATA
+===================================================== */
+
+const syllabus = {
+
+"Class 9": {
+
+"📐 Mathematics — Ganita Manjari": [
+
+"Chapter 1",
+"Chapter 2",
+"Chapter 3",
+"Chapter 4",
+"Chapter 5",
+"Chapter 6",
+"Chapter 7",
+"Chapter 8",
+"Chapter 9",
+"Chapter 10",
+"Chapter 11",
+"Chapter 12",
+"Chapter 13",
+"Chapter 14",
+"Chapter 15",
+"Chapter 16"
+
+],
+
+"🔬 Science — Exploration": [
+
+"1. Exploration: Entering the World of Secondary Science",
+
+"2. Cell: The Building Block of Life",
+
+"3. Tissues in Action",
+
+"4. Describing Motion Around Us",
+
+"5. Exploring Mixtures and their Separation",
+
+"6. How Forces Affect Motion",
+
+"7. Work, Energy, and Simple Machines",
+
+"8. Journey Inside the Atom",
+
+"9. Atomic Foundations of Matter",
+
+"10. Sound Waves: Characteristics and Applications",
+
+"11. Reproduction: How Life Continues",
+
+"12. Patterns in Life: Diversity and Classification",
+
+"13. Earth as a System: Energy, Matter, and Life"
+
+],
+
+"🌍 Social Science — Exploring Society: India and Beyond": [
+
+"Chapter 1 — Part 1 of the New NCERT book",
+
+"Chapter 2 — Part 1 of the New NCERT book",
+
+"Chapter 3 — Part 1 of the New NCERT book",
+
+"Chapter 4 — Part 1 of the New NCERT book",
+
+"Chapter 5 — Part 1 of the New NCERT book",
+
+"Chapter 6 — Part 1 of the New NCERT book",
+
+"Chapter 7 — Part 1 of the New NCERT book",
+
+"Chapter 8 — Part 1 of the New NCERT book",
+
+"Chapter 9 — Part 1 of the New NCERT book"
+
+],
+
+"📖 English — Kaveri": [
+
+"1. How I Taught My Grandmother to Read",
+
+"2. Bharat Our Land",
+
+"3. The Pot Maker",
+
+"4. Gifts of Grace: Honouring Our Vocations",
+
+"5. Winds of Change",
+
+"6. Canvas of Soil",
+
+"7. Vitamin-M",
+
+"8. I Cannot Remember My Mother",
+
+"9. The World of Limitless Possibilities",
+
+"10. Nine Gold Medals",
+
+"11. Twin Melodies",
+
+"12. A Friend Found in Music",
+
+"13. Carrier of Words",
+
+"14. Words",
+
+"15. Follow That Dream",
+
+"16. Believe in Yourself"
+
+],
+
+"📝 Hindi — Ganga": [
+
+"अध्याय 1",
+
+"अध्याय 2",
+
+"अध्याय 3",
+
+"अध्याय 4",
+
+"अध्याय 5",
+
+"अध्याय 6",
+
+"अध्याय 7",
+
+"अध्याय 8",
+
+"अध्याय 9",
+
+"अध्याय 10",
+
+"अध्याय 11",
+
+"अध्याय 12"
+
+]
+
+},
+
+
+/* =====================================================
+   CLASS 10
+===================================================== */
+
+"Class 10": {
+
+"📐 Mathematics": [
+
+"1. Real Numbers",
+"2. Polynomials",
+"3. Pair of Linear Equations in Two Variables",
+"4. Quadratic Equations",
+"5. Arithmetic Progressions",
+"6. Triangles",
+"7. Coordinate Geometry",
+"8. Introduction to Trigonometry",
+"9. Some Applications of Trigonometry",
+"10. Circles",
+"11. Areas Related to Circles",
+"12. Surface Areas and Volumes",
+"13. Statistics",
+"14. Probability"
+
+],
+
+"🔬 Science": [
+
+"1. Chemical Reactions and Equations",
+"2. Acids, Bases and Salts",
+"3. Metals and Non-metals",
+"4. Carbon and its Compounds",
+"5. Life Processes",
+"6. Control and Coordination",
+"7. How do Organisms Reproduce?",
+"8. Heredity",
+"9. Light – Reflection and Refraction",
+"10. The Human Eye and the Colourful World",
+"11. Electricity",
+"12. Magnetic Effects of Electric Current",
+"13. Our Environment"
+
+],
+
+"🌍 Social Science": [
+
+"1. The Rise of Nationalism in Europe",
+"2. Nationalism in India",
+"3. The Making of a Global World",
+"4. The Age of Industrialisation",
+"5. Print Culture and the Modern World",
+"6. Resources and Development",
+"7. Forest and Wildlife Resources",
+"8. Water Resources",
+"9. Agriculture",
+"10. Minerals and Energy Resources",
+"11. Manufacturing Industries",
+"12. Lifelines of National Economy",
+"13. Power Sharing",
+"14. Federalism",
+"15. Gender, Religion and Caste",
+"16. Political Parties",
+"17. Outcomes of Democracy",
+"18. Development",
+"19. Sectors of the Indian Economy",
+"20. Money and Credit",
+"21. Globalisation and the Indian Economy",
+"22. Consumer Rights"
+
+],
+
+"📖 English": [
+
+"Reading Skills",
+"Writing Skills",
+"Grammar",
+"Literature",
+"First Flight",
+"Footprints Without Feet",
+"Speaking Skills",
+"Listening Skills"
+
+],
+
+"📝 Hindi": [
+
+"अपठित बोध",
+"व्याकरण",
+"लेखन",
+"क्षितिज भाग 2",
+"कृतिका भाग 2",
+"मौखिक अभिव्यक्ति",
+"श्रवण कौशल",
+"पठन कौशल"
+
+]
+
+}
+
+};
+
+
+/* =====================================================
+   HALF-YEARLY RULES
+===================================================== */
+
+const class9HalfYearly = {
+
+"📐 Mathematics — Ganita Manjari": 8,
+
+"🔬 Science — Exploration": [
+
+"2. Cell: The Building Block of Life",
+
+"3. Tissues in Action",
+
+"4. Describing Motion Around Us",
+
+"5. Exploring Mixtures and their Separation",
+
+"6. How Forces Affect Motion",
+
+"8. Journey Inside the Atom"
+
+],
+
+"🌍 Social Science — Exploring Society: India and Beyond": "HALF",
+
+"📖 English — Kaveri": 8,
+
+"📝 Hindi — Ganga": 6
+
+};
+
+
+/* =====================================================
+   STORAGE
+===================================================== */
+
+let data =
+JSON.parse(
+localStorage.getItem("ayuStudyData")
+) || {
+
+name:"",
+className:"Class 9",
+
+examType:"Half-Yearly",
+
+target:120,
+
+studyToday:0,
+
+halfYearlyDate:"",
+
+finalDate:"",
+
+completed:{},
+
+lastStudyDate:""
+
+};
+
+
+/* =====================================================
+   SAVE
+===================================================== */
+
+function save(){
+
+localStorage.setItem(
+"ayuStudyData",
+JSON.stringify(data)
+);
+
+}
+
+
+/* =====================================================
+   DAILY RESET
+===================================================== */
+
+function checkDay(){
+
+const today =
+new Date()
+.toISOString()
+.split("T")[0];
+
+if(data.lastStudyDate !== today){
+
+data.studyToday=0;
+
+data.lastStudyDate=today;
+
+save();
+
+}
+
+}
+
+
+/* =====================================================
+   EXAM TOPICS
+===================================================== */
+
+function getExamTopics(){
+
+const classData =
+syllabus[data.className];
+
+let result={};
+
+
+for(const subject in classData){
+
+const all =
+classData[subject];
+
+
+if(data.examType==="Final"){
+
+result[subject]=all.slice();
+
+continue;
+
+}
+
+
+/* CLASS 9 */
+
+if(data.className==="Class 9"){
+
+const rule =
+class9HalfYearly[subject];
+
+
+if(Array.isArray(rule)){
+
+result[subject]=
+all.filter(
+x=>rule.includes(x)
+);
+
+}
+
+else if(rule==="HALF"){
+
+result[subject]=
+all.slice(
+0,
+Math.ceil(all.length/2)
+);
+
+}
+
+else{
+
+result[subject]=
+all.slice(0,rule);
+
+}
+
+}
+
+
+/* CLASS 10 */
+
+else{
+
+result[subject]=
+all.slice(
+0,
+Math.ceil(all.length/2)
+);
+
+}
+
+}
+
+return result;
+
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+function getProgress(){
+
+const topics =
+getExamTopics();
+
+let total=0;
+
+let completed=0;
+
+
+for(const subject in topics){
+
+topics[subject]
+.forEach((chapter,index)=>{
+
+total++;
+
+const key =
+data.className+
+"|" +
+data.examType+
+"|" +
+subject+
+"|" +
+chapter;
+
+if(data.completed[key]){
+
+completed++;
+
+}
+
+});
+
+}
+
+
+let percent =
+total===0
+?0
+:Math.round(
+completed/total*100
+);
+
+
+return {
+
+total,
+completed,
+percent
+
+};
+
+}
+
+
+/* =====================================================
+   DAYS
+===================================================== */
+
+function getExamDate(){
+
+return data.examType==="Final"
+?data.finalDate
+:data.halfYearlyDate;
+
+}
+
+
+function daysRemaining(){
+
+const date =
+getExamDate();
+
+if(!date)
+return null;
+
+const exam =
+new Date(date+"T23:59:59");
+
+const now =
+new Date();
+
+return Math.max(
+0,
+Math.ceil(
+(exam-now)/
+86400000
+)
+);
+
+}
+
+
+/* =====================================================
+   REQUIRED RATE
+===================================================== */
+
+function requiredRate(){
+
+const p =
+getProgress();
+
+const days =
+daysRemaining();
+
+if(!days)
+return null;
+
+const remaining =
+p.total-p.completed;
+
+return Math.ceil(
+remaining/days
+);
+
+}
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function render(){
+
+const container =
+document.getElementById(
+"subjects"
+);
+
+container.innerHTML="";
+
+
+const topics =
+getExamTopics();
+
+
+for(const subject in topics){
+
+const box =
+document.createElement("div");
+
+box.className="subject";
+
+
+const head =
+document.createElement("div");
+
+head.className=
+"subject-header";
+
+
+head.innerHTML=
+`<h3>${subject}</h3>
+<span>${topics[subject].length} Topics</span>`;
+
+
+box.appendChild(head);
+
+
+topics[subject]
+.forEach((chapter,index)=>{
+
+const row =
+document.createElement("label");
+
+row.className="chapter";
+
+
+const check =
+document.createElement("input");
+
+check.type="checkbox";
+
+
+const key =
+data.className+
+"|" +
+data.examType+
+"|" +
+subject+
+"|" +
+chapter;
+
+
+check.checked =
+!!data.completed[key];
+
+
+if(check.checked){
+
+row.classList.add(
+"completed"
+);
+
+}
+
+
+check.addEventListener(
+"change",
+()=>{
+
+data.completed[key]=
+check.checked;
+
+if(check.checked){
+
+row.classList.add(
+"completed"
+);
+
+}
+else{
+
+row.classList.remove(
+"completed"
+);
+
+}
+
+save();
+
+update();
+
+});
+
+
+
+const text =
+document.createElement("span");
+
+text.textContent=
+chapter;
+
+
+row.appendChild(check);
+
+row.appendChild(text);
+
+box.appendChild(row);
+
+});
+
+
+container.appendChild(box);
+
+}
+
+}
+
+
+/* =====================================================
+   UPDATE
+===================================================== */
+
+function update(){
+
+const p =
+getProgress();
+
+
+document.getElementById(
+"totalChapters"
+).textContent=p.total;
+
+
+document.getElementById(
+"completedChapters"
+).textContent=p.completed;
+
+
+document.getElementById(
+"progressText"
+).textContent=
+p.percent+"%";
+
+
+document.getElementById(
+"progressBar"
+).style.width=
+p.percent+"%";
+
+
+document.getElementById(
+"currentExam"
+).textContent=
+data.examType;
+
+
+const days =
+daysRemaining();
+
+
+document.getElementById(
+"daysRemaining"
+).textContent=
+days===null
+?"—"
+:days+" days";
+
+
+const rate =
+requiredRate();
+
+
+document.getElementById(
+"requiredRate"
+).textContent=
+rate===null
+?"—"
+:rate+" topics/day";
+
+
+document.getElementById(
+"studyToday"
+).textContent=
+data.studyToday+
+" minutes";
+
+
+document.getElementById(
+"targetDisplay"
+).textContent=
+data.target+
+" minutes";
+
+
+document.getElementById(
+"syllabusTitle"
+).textContent=
+data.examType+
+" Syllabus";
+
+}
+
+
+/* =====================================================
+   LOAD INPUTS
+===================================================== */
+
+document.getElementById(
+"studentName"
+).value=data.name;
+
+
+document.getElementById(
+"studentClass"
+).value=data.className;
+
+
+document.getElementById(
+"dailyTarget"
+).value=data.target;
+
+
+document.getElementById(
+"examType"
+).value=data.examType;
+
+
+document.getElementById(
+"halfYearlyDate"
+).value=
+data.halfYearlyDate;
+
+
+document.getElementById(
+"finalDate"
+).value=
+data.finalDate;
+
+
+/* =====================================================
+   SAVE DETAILS
+===================================================== */
+
+document.getElementById(
+"saveDetails"
+).addEventListener(
+"click",
+()=>{
+
+data.name =
+document.getElementById(
+"studentName"
+).value.trim();
+
+
+data.className =
+document.getElementById(
+"studentClass"
+).value;
+
+
+data.target =
+Number(
+document.getElementById(
+"dailyTarget"
+).value
+)||0;
+
+
+save();
+
+render();
+
+update();
+
+alert(
+"✅ Details saved successfully!"
+);
+
+});
+
+
+/* =====================================================
+   CLASS CHANGE
+===================================================== */
+
+document.getElementById(
+"studentClass"
+).addEventListener(
+"change",
+(e)=>{
+
+data.className=
+e.target.value;
+
+save();
+
+render();
+
+update();
+
+});
+
+
+/* =====================================================
+   EXAM CHANGE
+===================================================== */
+
+document.getElementById(
+"examType"
+).addEventListener(
+"change",
+(e)=>{
+
+data.examType=
+e.target.value;
+
+save();
+
+render();
+
+update();
+
+});
+
+
+/* =====================================================
+   DATES
+===================================================== */
+
+document.getElementById(
+"halfYearlyDate"
+).addEventListener(
+"change",
+(e)=>{
+
+data.halfYearlyDate=
+e.target.value;
+
+save();
+
+update();
+
+});
+
+
+document.getElementById(
+"finalDate"
+).addEventListener(
+"change",
+(e)=>{
+
+data.finalDate=
+e.target.value;
+
+save();
+
+update();
+
+});
+
+
+/* =====================================================
+   STUDY TIME
+===================================================== */
+
+document.getElementById(
+"addStudy"
+).addEventListener(
+"click",
+()=>{
+
+const input =
+document.getElementById(
+"studyMinutes"
+);
+
+const minutes =
+Number(input.value);
+
+
+if(!minutes || minutes<=0){
+
+alert(
+"Valid study minutes enter karo."
+);
+
+return;
+
+}
+
+
+data.studyToday+=
+minutes;
+
+save();
+
+update();
+
+input.value="";
+
+});
+
+
+/* =====================================================
+   RESET
+===================================================== */
+
+document.getElementById(
+"resetBtn"
+).addEventListener(
+"click",
+()=>{
+
+if(
+confirm(
+"Saara study progress delete karna hai?"
+)
+){
+
+localStorage.removeItem(
+"ayuStudyData"
+);
+
+location.reload();
+
+}
+
+});
+
+
+/* =====================================================
+   START
+===================================================== */
+
+checkDay();
+
+render();
+
+update();
+
+</script>
 
 </body>
-</html>
+</html>    

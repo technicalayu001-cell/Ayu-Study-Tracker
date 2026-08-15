@@ -1,35 +1,540 @@
-const $=id=>document.getElementById(id);
-const KEY="ayuStudyTrackerV1";
-let data=JSON.parse(localStorage.getItem(KEY)||'{"name":"","class":"Class 9","exam":"","target":3,"topics":[]}');
+/* =========================================
+   AYU STUDY TRACKER
+   Built by Technical Ayu
+========================================= */
 
-function save(){localStorage.setItem(KEY,JSON.stringify(data));render();}
-function today(){return new Date().toISOString().slice(0,10)}
 
-function render(){
-  $("studentName").value=data.name||"";
-  $("studentClass").value=data.class||"Class 9";
-  $("examDate").value=data.exam||"";
-  $("targetInput").value=data.target||3;
-  $("welcome").textContent=data.name?`Keep going, ${data.name}! Your plan is saved on this device.`:"Add your first topic below.";
-  const filter=$("filter").value;
-  const visible=data.topics.filter(t=>filter==="all"||(filter==="done"?t.done:!t.done));
-  $("topicList").innerHTML=visible.length?visible.map(t=>`
-    <div class="topic ${t.done?"done":""}">
-      <input class="check" type="checkbox" ${t.done?"checked":""} onchange="toggleTopic('${t.id}')">
-      <div><div class="name">${escapeHtml(t.name)}</div><div class="meta">${escapeHtml(t.subject)} • Added ${t.date}</div></div>
-      <button class="delete" onclick="deleteTopic('${t.id}')">✕</button>
-    </div>`).join(""):`<p>No topics in this filter yet.</p>`;
-  const total=data.topics.length, done=data.topics.filter(t=>t.done).length, todayDone=data.topics.filter(t=>t.doneDate===today()).length;
-  $("totalCount").textContent=total;$("doneCount").textContent=done;$("progressCount").textContent=total?Math.round(done/total*100)+"%":"0%";$("todayCount").textContent=todayDone;
-  const target=data.target||3, pct=Math.min(100,Math.round(todayDone/target*100));
-  $("bar").style.width=pct+"%";$("targetText").textContent=`${todayDone} / ${target} completed today`;
+/* SUBJECT DATA */
+
+const subjects = {
+
+  "📘 Mathematics": [
+
+    "Number Systems",
+    "Polynomials",
+    "Coordinate Geometry",
+    "Linear Equations in Two Variables",
+    "Introduction to Euclid's Geometry",
+    "Lines and Angles",
+    "Triangles",
+    "Quadrilaterals",
+    "Circles",
+    "Heron's Formula",
+    "Surface Areas and Volumes",
+    "Statistics",
+    "Probability"
+
+  ],
+
+
+  "🔬 Science": [
+
+    "Matter in Our Surroundings",
+    "Is Matter Around Us Pure",
+    "Atoms and Molecules",
+    "Structure of the Atom",
+    "The Fundamental Unit of Life",
+    "Tissues",
+    "Motion",
+    "Force and Laws of Motion",
+    "Gravitation",
+    "Work and Energy",
+    "Sound",
+    "Improvement in Food Resources"
+
+  ],
+
+
+  "🌍 Social Science": [
+
+    "India and the Contemporary World",
+    "Physical Features of India",
+    "Drainage",
+    "Climate",
+    "Natural Vegetation and Wildlife",
+    "Population",
+    "Democracy",
+    "Constitutional Design",
+    "Electoral Politics",
+    "Working of Institutions",
+    "Democratic Rights",
+    "People as Resource",
+    "Poverty as a Challenge",
+    "Food Security in India"
+
+  ],
+
+
+  "📖 English": [
+
+    "Reading Skills",
+    "Writing Skills",
+    "Grammar",
+    "Literature",
+    "Vocabulary"
+
+  ],
+
+  "📝 Hindi": [
+
+    "अपठित बोध",
+    "व्याकरण",
+    "लेखन",
+    "क्षितिज",
+    "कृतिका"
+
+  ]
+
+};
+
+
+/* GET SAVED DATA */
+
+let data = JSON.parse(
+  localStorage.getItem("ayuStudyData")
+) || {
+
+  name: "",
+
+  className: "Class 9",
+
+  target: 120,
+
+  studyToday: 0,
+
+  completed: {}
+
+};
+
+
+/* SAVE DATA */
+
+function saveData() {
+
+  localStorage.setItem(
+    "ayuStudyData",
+    JSON.stringify(data)
+  );
+
 }
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));}
-window.toggleTopic=id=>{const t=data.topics.find(x=>x.id===id);if(t){t.done=!t.done;t.doneDate=t.done?today():"";save();}};
-window.deleteTopic=id=>{data.topics=data.topics.filter(x=>x.id!==id);save();};
-$("saveProfile").onclick=()=>{data.name=$("studentName").value.trim();data.class=$("studentClass").value;data.exam=$("examDate").value;save();};
-$("saveTarget").onclick=()=>{data.target=Math.max(1,Number($("targetInput").value)||3);save();};
-$("addBtn").onclick=()=>{const name=$("topic").value.trim();if(!name)return;data.topics.push({id:Date.now().toString(),name,subject:$("subject").value,done:false,doneDate:"",date:today()});$("topic").value="";save();};
-$("filter").onchange=render;
-$("themeBtn").onclick=()=>{document.body.classList.toggle("light");$("themeBtn").textContent=document.body.classList.contains("light")?"🌙 Dark":"☀️ Light";};
-render();
+
+
+/* STUDENT DETAILS */
+
+const studentName =
+  document.getElementById("studentName");
+
+const studentClass =
+  document.getElementById("studentClass");
+
+const dailyTarget =
+  document.getElementById("dailyTarget");
+
+
+studentName.value = data.name;
+
+studentClass.value = data.className;
+
+dailyTarget.value = data.target;
+
+
+/* SAVE DETAILS */
+
+document
+  .getElementById("saveDetails")
+  .addEventListener("click", function () {
+
+    data.name = studentName.value.trim();
+
+    data.className =
+      studentClass.value;
+
+    data.target =
+      Number(dailyTarget.value) || 0;
+
+    saveData();
+
+    updateDashboard();
+
+    alert("✅ Details saved successfully!");
+
+  });
+
+
+/* RENDER SUBJECTS */
+
+function renderSubjects() {
+
+  const container =
+    document.getElementById("subjects");
+
+  container.innerHTML = "";
+
+
+  let chapterNumber = 0;
+
+
+  for (const subject in subjects) {
+
+    const subjectBox =
+      document.createElement("div");
+
+    subjectBox.className = "subject";
+
+
+    const header =
+      document.createElement("div");
+
+    header.className =
+      "subject-header";
+
+
+    header.innerHTML = `
+      <h3>${subject}</h3>
+      <span>${subjects[subject].length} Chapters</span>
+    `;
+
+
+    subjectBox.appendChild(header);
+
+
+    subjects[subject].forEach(
+      (chapter, index) => {
+
+        chapterNumber++;
+
+
+        const row =
+          document.createElement("label");
+
+        row.className = "chapter";
+
+
+        const checkbox =
+          document.createElement("input");
+
+        checkbox.type = "checkbox";
+
+
+        const key =
+          subject + "_" + index;
+
+
+        checkbox.checked =
+          !!data.completed[key];
+
+
+        if (checkbox.checked) {
+
+          row.classList.add(
+            "completed"
+          );
+
+        }
+
+
+        checkbox.addEventListener(
+          "change",
+          function () {
+
+            data.completed[key] =
+              checkbox.checked;
+
+
+            if (checkbox.checked) {
+
+              row.classList.add(
+                "completed"
+              );
+
+            } else {
+
+              row.classList.remove(
+                "completed"
+              );
+
+            }
+
+
+            saveData();
+
+            updateDashboard();
+
+          }
+        );
+
+
+        const number =
+          document.createElement("span");
+
+        number.className =
+          "chapter-number";
+
+        number.textContent =
+          chapterNumber + ".";
+
+
+        const title =
+          document.createElement("span");
+
+        title.textContent =
+          chapter;
+
+
+        row.appendChild(checkbox);
+
+        row.appendChild(number);
+
+        row.appendChild(title);
+
+
+        subjectBox.appendChild(row);
+
+      }
+    );
+
+
+    container.appendChild(subjectBox);
+
+  }
+
+}
+
+
+/* CALCULATE PROGRESS */
+
+function getProgress() {
+
+  let total = 0;
+
+  let completed = 0;
+
+
+  for (const subject in subjects) {
+
+    total +=
+      subjects[subject].length;
+
+
+    subjects[subject].forEach(
+      (chapter, index) => {
+
+        const key =
+          subject + "_" + index;
+
+
+        if (data.completed[key]) {
+
+          completed++;
+
+        }
+
+      }
+    );
+
+  }
+
+
+  return {
+    total,
+    completed,
+    percentage:
+      total === 0
+        ? 0
+        : Math.round(
+            completed / total * 100
+          )
+  };
+
+}
+
+
+/* UPDATE DASHBOARD */
+
+function updateDashboard() {
+
+  const progress =
+    getProgress();
+
+
+  document.getElementById(
+    "totalChapters"
+  ).textContent =
+    progress.total;
+
+
+  document.getElementById(
+    "completedChapters"
+  ).textContent =
+    progress.completed;
+
+
+  document.getElementById(
+    "progressPercent"
+  ).textContent =
+    progress.percentage + "%";
+
+
+  document.getElementById(
+    "progressText"
+  ).textContent =
+    progress.percentage + "%";
+
+
+  document.getElementById(
+    "progressBar"
+  ).style.width =
+    progress.percentage + "%";
+
+
+  document.getElementById(
+    "targetDisplay"
+  ).textContent =
+    data.target + " minutes";
+
+
+  document.getElementById(
+    "studyToday"
+  ).textContent =
+    data.studyToday + " minutes";
+
+}
+
+
+/* ADD STUDY TIME */
+
+document
+  .getElementById("addStudy")
+  .addEventListener("click", function () {
+
+    const input =
+      document.getElementById(
+        "studyMinutes"
+      );
+
+
+    const minutes =
+      Number(input.value);
+
+
+    if (!minutes || minutes <= 0) {
+
+      alert(
+        "Please enter valid study time."
+      );
+
+      return;
+
+    }
+
+
+    data.studyToday += minutes;
+
+
+    saveData();
+
+    updateDashboard();
+
+
+    input.value = "";
+
+
+    alert(
+      "🎯 Study time added!"
+    );
+
+  });
+
+
+/* DARK / LIGHT MODE */
+
+const themeBtn =
+  document.getElementById(
+    "themeBtn"
+  );
+
+
+let lightMode =
+  localStorage.getItem(
+    "ayuLightMode"
+  ) === "true";
+
+
+function updateTheme() {
+
+  if (lightMode) {
+
+    document.body.classList.add(
+      "light"
+    );
+
+    themeBtn.textContent =
+      "🌙 Dark";
+
+  } else {
+
+    document.body.classList.remove(
+      "light"
+    );
+
+    themeBtn.textContent =
+      "☀️ Light";
+
+  }
+
+}
+
+
+themeBtn.addEventListener(
+  "click",
+  function () {
+
+    lightMode = !lightMode;
+
+    localStorage.setItem(
+      "ayuLightMode",
+      lightMode
+    );
+
+    updateTheme();
+
+  }
+);
+
+
+/* RESET DATA */
+
+document
+  .getElementById("resetBtn")
+  .addEventListener("click", function () {
+
+    const confirmReset =
+      confirm(
+        "⚠️ Kya aap sach me saara study data delete karna chahte hain?"
+      );
+
+
+    if (!confirmReset) {
+
+      return;
+
+    }
+
+
+    localStorage.removeItem(
+      "ayuStudyData"
+    );
+
+
+    location.reload();
+
+  });
+
+
+/* INITIAL LOAD */
+
+renderSubjects();
+
+updateDashboard();
+
+updateTheme();

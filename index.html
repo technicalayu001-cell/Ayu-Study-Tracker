@@ -1,695 +1,727 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Ayush Study Tracker - Class 9 & 10 Study Planner</title>
+<title>Ayu Study Tracker – Class 9 & 10 Study Planner</title>
 
-<meta name="description" content="Ayush Study Tracker - Class 9 and Class 10 study planner with syllabus tracking, Half-Yearly and Final Exam progress, chapter tracking and NCERT resources.">
+<meta name="description" content="Ayu Study Tracker is a simple Class 9 and Class 10 study planner with NCERT syllabus, chapter tracking, exam preparation, progress percentage and study resources.">
 
-<meta name="keywords" content="Ayush Study Tracker, Ayush study tracker, Class 9 study tracker, Class 10 study tracker, NCERT study planner, study tracker">
+<meta name="keywords" content="Ayu Study Tracker, Class 9 study tracker, Class 10 study tracker, NCERT syllabus, NCERT study planner">
 
 <meta name="author" content="Ayush">
+<meta name="robots" content="index, follow">
+
+<link rel="canonical" href="https://technicalayu001-cell.github.io/Ayu-Study-Tracker/">
 
 <style>
-
 *{
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,sans-serif;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+:root{
+    --bg:#07111f;
+    --card:#101d31;
+    --card2:#0c1728;
+    --text:#f5f7fb;
+    --muted:#9eacc1;
+    --primary:#38bdf8;
+    --primary2:#0284c7;
+    --border:#263954;
+    --green:#22c55e;
+    --orange:#f59e0b;
+    --red:#ef4444;
 }
 
 body{
-    background:#0f172a;
-    color:#f8fafc;
+    background:var(--bg);
+    color:var(--text);
     min-height:100vh;
+}
+
+body.light{
+    --bg:#f3f7fb;
+    --card:#ffffff;
+    --card2:#eef4fa;
+    --text:#152033;
+    --muted:#607087;
+    --border:#d5dfeb;
+}
+
+header{
+    background:var(--card);
+    border-bottom:1px solid var(--border);
+    padding:18px;
+    position:sticky;
+    top:0;
+    z-index:20;
+}
+
+.header-inner{
+    max-width:1150px;
+    margin:auto;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:15px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:13px;
+}
+
+.logo{
+    width:58px;
+    height:58px;
+    border-radius:17px;
+    background:var(--primary);
+    color:#052033;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:30px;
+    font-weight:900;
+}
+
+.brand h1{
+    font-size:24px;
+}
+
+.brand p{
+    color:var(--muted);
+    margin-top:4px;
+}
+
+button,select,input{
+    font:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+.theme-btn{
+    background:var(--card2);
+    border:1px solid var(--border);
+    color:var(--text);
+    padding:12px 18px;
+    border-radius:14px;
+    font-weight:bold;
 }
 
 .container{
     width:94%;
-    max-width:1100px;
-    margin:auto;
-    padding:20px 0 40px;
+    max-width:1150px;
+    margin:30px auto;
 }
 
-header{
-    background:#1e293b;
-    padding:28px 20px;
-    border-radius:20px;
-    text-align:center;
-    margin-bottom:20px;
+.hero{
+    margin-bottom:25px;
 }
 
-header h1{
-    font-size:30px;
-    margin-bottom:8px;
+.hero h2{
+    font-size:38px;
+    margin-bottom:10px;
 }
 
-header p{
-    color:#cbd5e1;
+.hero p{
+    color:var(--muted);
+    font-size:18px;
 }
 
 .card{
-    background:#1e293b;
-    padding:20px;
-    border-radius:18px;
-    margin-bottom:20px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:22px;
+    margin-bottom:22px;
 }
 
 .card h2{
-    margin-bottom:15px;
+    margin-bottom:18px;
 }
 
-.grid{
+.form-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns:repeat(3,1fr);
     gap:15px;
 }
 
 label{
     display:block;
+    color:var(--muted);
     margin-bottom:7px;
-    color:#cbd5e1;
-}
-
-input,
-select,
-button{
-    width:100%;
-    padding:12px;
-    border-radius:10px;
-    border:1px solid #475569;
-    background:#0f172a;
-    color:white;
-    font-size:15px;
-}
-
-button{
-    background:#2563eb;
-    border:none;
     font-weight:bold;
-    cursor:pointer;
 }
 
-button:hover{
-    opacity:.9;
+input,select{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:var(--card2);
+    color:var(--text);
+    outline:none;
+}
+
+input:focus,select:focus{
+    border-color:var(--primary);
+}
+
+.primary{
+    background:var(--primary);
+    color:#032238;
+    border:0;
+    padding:14px 22px;
+    border-radius:13px;
+    font-weight:900;
+    margin-top:15px;
+}
+
+.primary:hover{
+    background:#67cdf7;
 }
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
-    gap:12px;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
 }
 
 .stat{
-    background:#0f172a;
-    padding:18px 10px;
-    border-radius:15px;
-    text-align:center;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:20px;
 }
 
-.stat strong{
-    display:block;
-    font-size:23px;
+.stat-number{
+    font-size:34px;
+    font-weight:900;
     margin-top:8px;
+}
+
+.stat-label{
+    color:var(--muted);
+}
+
+.progress-wrap{
+    margin-top:15px;
 }
 
 .progress-bg{
     width:100%;
-    height:20px;
-    background:#334155;
+    height:13px;
+    background:var(--card2);
     border-radius:20px;
     overflow:hidden;
-    margin-top:18px;
+    border:1px solid var(--border);
 }
 
 .progress-bar{
     height:100%;
     width:0%;
-    background:#22c55e;
+    background:var(--primary);
     transition:.3s;
 }
 
-.progress-text{
-    text-align:center;
-    margin-top:8px;
-    font-weight:bold;
+.toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+.toolbar input{
+    flex:1;
+    min-width:220px;
 }
 
 .subject{
-    background:#0f172a;
-    border-radius:15px;
+    border:1px solid var(--border);
+    border-radius:18px;
     margin-bottom:15px;
     overflow:hidden;
 }
 
-.subject-header{
+.subject-head{
+    background:var(--card2);
     padding:16px;
-    background:#334155;
     display:flex;
     justify-content:space-between;
+    align-items:center;
     gap:10px;
+}
+
+.subject-title{
+    font-size:18px;
+    font-weight:900;
+}
+
+.subject-progress{
+    color:var(--primary);
+    font-weight:bold;
+}
+
+.chapter-list{
+    padding:8px 14px 14px;
 }
 
 .chapter{
     display:flex;
     align-items:center;
-    gap:10px;
-    padding:13px 16px;
-    border-top:1px solid #334155;
-    cursor:pointer;
+    gap:12px;
+    padding:13px 8px;
+    border-bottom:1px solid var(--border);
 }
 
-.chapter input{
-    width:auto;
+.chapter:last-child{
+    border-bottom:0;
 }
 
-.chapter.completed{
+.chapter input[type="checkbox"]{
+    width:20px;
+    height:20px;
+    accent-color:var(--green);
+}
+
+.chapter.done span{
     text-decoration:line-through;
     opacity:.55;
 }
 
-.resource{
-    background:#0f172a;
-    padding:16px;
-    border-radius:14px;
-    margin-bottom:12px;
-}
-
-.resource a{
-    display:inline-block;
-    margin-top:10px;
-    text-decoration:none;
-    background:#2563eb;
-    color:white;
-    padding:10px 15px;
+.badge{
+    margin-left:auto;
+    font-size:12px;
+    padding:5px 8px;
     border-radius:8px;
+    background:rgba(56,189,248,.12);
+    color:var(--primary);
 }
 
-.small{
-    font-size:13px;
-    color:#94a3b8;
-    margin-top:7px;
+.resource-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
 }
 
-.danger{
-    background:#dc2626;
+.resource{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:18px;
+}
+
+.resource h3{
+    margin-bottom:7px;
+}
+
+.resource p{
+    color:var(--muted);
+    margin-bottom:14px;
+}
+
+.resource button{
+    background:var(--primary);
+    border:0;
+    border-radius:10px;
+    padding:10px 15px;
+    font-weight:bold;
+}
+
+.tip{
+    background:rgba(56,189,248,.08);
+    border:1px solid rgba(56,189,248,.25);
+    border-radius:15px;
+    padding:15px;
+    color:var(--muted);
 }
 
 footer{
     text-align:center;
-    color:#94a3b8;
-    padding:20px;
+    color:var(--muted);
+    padding:30px 15px;
 }
 
-@media(max-width:600px){
-
-    header h1{
-        font-size:24px;
-    }
-
-    .card{
-        padding:15px;
-    }
-
+.hidden{
+    display:none!important;
 }
 
+@media(max-width:800px){
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .resource-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h2{
+        font-size:30px;
+    }
+
+    .header-inner{
+        align-items:flex-start;
+    }
+
+    .brand h1{
+        font-size:20px;
+    }
+
+    .logo{
+        width:50px;
+        height:50px;
+    }
+}
+
+@media(max-width:480px){
+    .container{
+        width:92%;
+        margin-top:20px;
+    }
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .stat-number{
+        font-size:27px;
+    }
+
+    .theme-btn{
+        padding:10px;
+    }
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="container">
-
 <header>
+<div class="header-inner">
 
-<h1>📚 Ayush Study Tracker</h1>
+<div class="brand">
+<div class="logo">A</div>
+<div>
+<h1>Ayu Study Tracker</h1>
+<p>Class 9 & 10 • Smart Study Planner</p>
+</div>
+</div>
 
-<p>Class 9 & Class 10 • NCERT Study Planner</p>
+<button class="theme-btn" onclick="toggleTheme()" id="themeBtn">
+🌙 Dark
+</button>
 
+</div>
 </header>
 
+<main class="container">
 
-<!-- STUDENT DETAILS -->
+<section class="hero">
+<h2>Your Study Dashboard</h2>
+<p>Track chapters, prepare for exams and monitor your progress.</p>
+</section>
 
-<div class="card">
+<section class="card">
+<h2>👨‍🎓 Student Details</h2>
 
-<h2>👤 Student Details</h2>
-
-<div class="grid">
+<div class="form-grid">
 
 <div>
-
-<label>Name</label>
-
-<input
-id="studentName"
-placeholder="Ayush">
-
+<label>Student Name</label>
+<input id="studentName" placeholder="e.g. Ayush">
 </div>
 
 <div>
-
 <label>Class</label>
-
-<select id="studentClass">
-
-<option>Class 9</option>
-
-<option>Class 10</option>
-
+<select id="classSelect" onchange="changeClass()">
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
 </select>
-
 </div>
 
 <div>
-
-<label>Daily Study Target</label>
-
-<input
-id="dailyTarget"
-type="number"
-value="120">
-
-</div>
-
-</div>
-
-<br>
-
-<button id="saveDetails">
-💾 Save Details
-</button>
-
-</div>
-
-
-<!-- EXAM PLANNER -->
-
-<div class="card">
-
-<h2>📅 Exam Planner</h2>
-
-<div class="grid">
-
-<div>
-
 <label>Exam Type</label>
-
-<select id="examType">
-
-<option>Half-Yearly</option>
-
-<option>Final</option>
-
+<select id="examType" onchange="updateApp()">
+<option value="half">Half Yearly</option>
+<option value="final">Final Exam</option>
 </select>
-
 </div>
 
 <div>
-
-<label>Half-Yearly Exam Date</label>
-
-<input
-id="halfYearlyDate"
-type="date">
-
+<label>Exam Date</label>
+<input type="date" id="examDate" onchange="saveData()">
 </div>
 
 <div>
-
-<label>Final Exam Date</label>
-
-<input
-id="finalDate"
-type="date">
-
+<label>Daily Target (chapters)</label>
+<input type="number" id="dailyTarget" min="1" value="2" onchange="saveData()">
 </div>
 
 </div>
 
-<p class="small">
+<button class="primary" onclick="saveDetails()">Save Details</button>
+</section>
 
-Half-Yearly में Half-Yearly syllabus count होगा।
-Final में पूरा syllabus count होगा।
-
-</p>
-
-</div>
-
-
-<!-- PROGRESS -->
-
-<div class="card">
-
-<h2>🎯 <span id="currentExam">Half-Yearly</span> Progress</h2>
-
-<div class="stats">
+<section class="stats">
 
 <div class="stat">
-
-Total Topics
-
-<strong id="totalChapters">0</strong>
-
+<div class="stat-label">Overall Progress</div>
+<div class="stat-number" id="overallProgress">0%</div>
 </div>
 
 <div class="stat">
-
-Completed
-
-<strong id="completedChapters">0</strong>
-
+<div class="stat-label">Completed</div>
+<div class="stat-number" id="completedCount">0</div>
 </div>
 
 <div class="stat">
-
-Progress
-
-<strong id="progressText">0%</strong>
-
+<div class="stat-label">Total Chapters</div>
+<div class="stat-number" id="totalCount">0</div>
 </div>
 
 <div class="stat">
-
-Days Remaining
-
-<strong id="daysRemaining">—</strong>
-
+<div class="stat-label">Remaining</div>
+<div class="stat-number" id="remainingCount">0</div>
 </div>
 
-<div class="stat">
+</section>
 
-Required Rate
+<section class="card">
+<h2>📊 Overall Progress</h2>
 
-<strong id="requiredRate">—</strong>
-
-</div>
-
-</div>
-
+<div class="progress-wrap">
 <div class="progress-bg">
-
-<div
-id="progressBar"
-class="progress-bar">
+<div class="progress-bar" id="overallBar"></div>
+</div>
 </div>
 
-</div>
-
-</div>
-
-
-<!-- TODAY STUDY -->
-
-<div class="card">
-
-<h2>⏱️ Today's Study</h2>
-
-<div class="stats">
-
-<div class="stat">
-
-Study Today
-
-<strong id="studyToday">
-0 minutes
-</strong>
-
-</div>
-
-<div class="stat">
-
-Daily Target
-
-<strong id="targetDisplay">
-120 minutes
-</strong>
-
-</div>
-
-</div>
-
-<br>
-
-<div class="grid">
-
-<input
-id="studyMinutes"
-type="number"
-placeholder="Study minutes">
-
-<button id="addStudy">
-➕ Add Study Time
-</button>
-
-</div>
-
-</div>
-
-
-<!-- SYLLABUS -->
-
-<div class="card">
-
-<h2>
-📚 <span id="syllabusTitle">
-Half-Yearly Syllabus
-</span>
-</h2>
-
-<p class="small">
-Chapter पूरा होने पर checkbox tick करो।
+<p id="examInfo" class="tip" style="margin-top:15px;">
+Select your exam to see the active syllabus.
 </p>
+</section>
 
-<br>
+<section class="card">
+
+<h2>📚 Syllabus Tracker</h2>
+
+<div class="toolbar">
+<input id="searchBox" placeholder="🔎 Search chapter..." oninput="renderSubjects()">
+
+<select id="subjectFilter" onchange="renderSubjects()">
+<option value="all">All Subjects</option>
+<option value="Mathematics">Mathematics</option>
+<option value="Science">Science</option>
+<option value="Social Science">Social Science</option>
+<option value="English">English</option>
+<option value="Hindi">Hindi</option>
+</select>
+</div>
 
 <div id="subjects"></div>
 
-</div>
+</section>
 
-
-<!-- NCERT RESOURCES -->
-
-<div class="card">
+<section class="card">
 
 <h2>📖 NCERT Resources</h2>
 
-<p class="small">
-Official NCERT textbook resources.
-</p>
+<div class="tip" style="margin-bottom:18px;">
+Official NCERT/ePathshala resources can be opened from here. 
+The app keeps the resource section in one place so you don't have to search for every book separately.
+</div>
 
-<br>
-
+<div class="resource-grid">
 
 <div class="resource">
-
-<h3>🔬 Class 9 — Exploration</h3>
-
-<p class="small">
-Class 9 Science
-</p>
-
-<a
-href="https://ncert.nic.in/textbook.php?iesc1=0-16"
-target="_blank">
-
-📖 Open NCERT Book
-
-</a>
-
-</div>
-
-
-<div class="resource">
-
-<h3>🌍 Class 9 — Exploring Society: India and Beyond</h3>
-
-<p class="small">
-Class 9 Social Science
-</p>
-
-<a
-href="https://ncert.nic.in/textbook.php?gees1=gl-9"
-target="_blank">
-
-📖 Open NCERT Book
-
-</a>
-
-</div>
-
-
-<div class="resource">
-
-<h3>📚 NCERT Textbook Portal</h3>
-
-<a
-href="https://ncert.nic.in/textbook.php"
-target="_blank">
-
-📖 Open NCERT Portal
-
-</a>
-
-</div>
-
-</div>
-
-
-<!-- RESET -->
-
-<div class="card">
-
-<button
-id="resetBtn"
-class="danger">
-
-⚠️ Reset All Data
-
+<h3>📘 Class 9 Mathematics</h3>
+<p>Ganita Manjari – Part 1</p>
+<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0904')">
+Open Book
 </button>
+</div>
+
+<div class="resource">
+<h3>🔬 Class 9 Science</h3>
+<p>Exploration</p>
+<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0906')">
+Open Book
+</button>
+</div>
+
+<div class="resource">
+<h3>🌍 Class 9 Social Science</h3>
+<p>Understanding Society: India and Beyond – Part 1</p>
+<button onclick="openResource('https://epathshala.nic.in/')">
+Open Resource
+</button>
+</div>
+
+<div class="resource">
+<h3>📕 Class 9 English</h3>
+<p>Kaveri</p>
+<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0903')">
+Open Book
+</button>
+</div>
+
+<div class="resource">
+<h3>📗 Class 9 Hindi</h3>
+<p>Ganga</p>
+<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0901')">
+Open Book
+</button>
+</div>
+
+<div class="resource">
+<h3>📚 Class 10 NCERT</h3>
+<p>Official NCERT ePathshala resources</p>
+<button onclick="openResource('https://epathshala.nic.in/')">
+Open Resources
+</button>
+</div>
 
 </div>
 
+</section>
+
+<section class="card">
+
+<h2>🎯 Study Tips</h2>
+
+<div class="tip">
+<strong>Daily plan:</strong> Complete your daily target, tick the chapters you finish and keep checking your progress percentage.
+<br><br>
+<strong>Half Yearly:</strong> The tracker automatically shows the selected Half Yearly syllabus.
+<br><br>
+<strong>Final Exam:</strong> Select Final Exam to see the complete final syllabus.
+</div>
+
+</section>
+
+</main>
 
 <footer>
-
-<strong>Ayush Study Tracker</strong>
-
-<br>
-
-Class 9 & Class 10 Study Planner
-
+<p>© 2026 Ayu Study Tracker</p>
+<p style="margin-top:6px;">Made for smart and organised study preparation.</p>
 </footer>
-
-</div>
-
 
 <script>
 
-/* =========================
-   SYLLABUS
-========================= */
+/* =========================================================
+   AYU STUDY TRACKER
+   Data + Syllabus
+========================================================= */
 
 const syllabus = {
 
-"Class 9": {
+9: {
 
-"📐 Mathematics — Ganita Manjari": [
-
-"Chapter 1",
-"Chapter 2",
-"Chapter 3",
-"Chapter 4",
-"Chapter 5",
-"Chapter 6",
-"Chapter 7",
-"Chapter 8",
-"Chapter 9",
-"Chapter 10",
-"Chapter 11",
-"Chapter 12",
-"Chapter 13",
-"Chapter 14",
-"Chapter 15",
-"Chapter 16"
-
-],
-
-"🔬 Science — Exploration": [
-
-"1. Exploration: Entering the World of Secondary Science",
-
-"2. Cell: The Building Block of Life",
-
-"3. Tissues in Action",
-
-"4. Describing Motion Around Us",
-
-"5. Exploring Mixtures and their Separation",
-
-"6. How Forces Affect Motion",
-
-"7. Work, Energy, and Simple Machines",
-
-"8. Journey Inside the Atom",
-
-"9. Atomic Foundations of Matter",
-
-"10. Sound Waves: Characteristics and Applications",
-
-"11. Reproduction: How Life Continues",
-
-"12. Patterns in Life: Diversity and Classification",
-
-"13. Earth as a System: Energy, Matter, and Life"
-
-],
-
-"🌍 Social Science — Understanding Society: India and Beyond Part 1": [
-
-"Chapter 1 — Part 1",
-"Chapter 2 — Part 1",
-"Chapter 3 — Part 1",
-"Chapter 4 — Part 1",
-"Chapter 5 — Part 1",
-"Chapter 6 — Part 1",
-"Chapter 7 — Part 1",
-"Chapter 8 — Part 1",
-"Chapter 9 — Part 1"
-
-],
-
-"📖 English — Kaveri": [
-
-"1. How I Taught My Grandmother to Read",
-"2. Bharat Our Land",
-"3. The Pot Maker",
-"4. Gifts of Grace: Honouring Our Vocations",
-"5. Winds of Change",
-"6. Canvas of Soil",
-"7. Vitamin-M",
-"8. I Cannot Remember My Mother",
-"9. The World of Limitless Possibilities",
-"10. Nine Gold Medals",
-"11. Twin Melodies",
-"12. A Friend Found in Music",
-"13. Carrier of Words",
-"14. Words",
-"15. Follow That Dream",
-"16. Believe in Yourself"
-
-],
-
-"📝 Hindi — Ganga": [
-
-"अध्याय 1",
-"अध्याय 2",
-"अध्याय 3",
-"अध्याय 4",
-"अध्याय 5",
-"अध्याय 6",
-"अध्याय 7",
-"अध्याय 8",
-"अध्याय 9",
-"अध्याय 10",
-"अध्याय 11",
-"अध्याय 12"
-
+"Mathematics": {
+book:"Ganita Manjari Part 1",
+chapters:[
+"1. Orienting Yourself: The Use of Coordinates",
+"2. Introduction to Linear Polynomials",
+"3. The World of Numbers",
+"4. Exploring Algebraic Identities",
+"5. I’m Up and Down, and Round and Round",
+"6. Measuring Space: Perimeter and Area",
+"7. The Mathematics of Maybe: Introduction to Probability",
+"8. Predicting What Comes Next: Exploring Sequences and Progressions"
 ]
+},
+
+"Science": {
+book:"Exploration",
+chapters:[
+"1. Exploration: Entering the World of Secondary Science",
+"2. Cell: The Building Block of Life",
+"3. Tissues in Action",
+"4. Describing Motion Around Us",
+"5. Exploring Mixtures and their Separation",
+"6. How Forces Affect Motion",
+"7. Work, Energy, and Simple Machines",
+"8. Journey Inside the Atom",
+"9. Atomic Foundations of Matter",
+"10. Sound Waves: Characteristics and Applications",
+"11. Reproduction: How Life Continues",
+"12. Patterns in Life: Diversity and Classification",
+"13. Earth as a System: Energy, Matter, and Life"
+]
+},
+
+"Social Science": {
+book:"Understanding Society: India and Beyond Part 1",
+chapters:[
+"1. Understanding Social Science",
+"2. Shaping of the Earth's Surface",
+"3. Atmosphere and Climate",
+"4. Early Humans and Beginning of Civilisation",
+"5. State and Society up to 1000 CE",
+"6. Democracy",
+"7. Elections",
+"8. Building Blocks in Economics: The Problem of Choice",
+"9. The Price Puzzle: What Drives the Market"
+]
+},
+
+"English": {
+book:"Kaveri",
+chapters:[
+"1. How I Taught My Grandmother to Read",
+"1. Poem: Bharat Our Land",
+"2. The Pot Maker",
+"2. Poem: Gifts of Grace: Honouring Our Vocations",
+"3. Winds of Change",
+"3. Poem: Canvas of Soil",
+"4. Vitamin-M",
+"4. Poem: I Cannot Remember My Mother",
+"5. The World of Limitless Possibilities",
+"5. Poem: Nine Gold Medals",
+"6. Twin Melodies",
+"6. Poem: A Friend Found in Music",
+"7. Carrier of Words",
+"7. Poem: Words",
+"8. Follow That Dream",
+"8. Poem: Believe in Yourself"
+]
+},
+
+"Hindi": {
+book:"Ganga",
+chapters:[
+"1. दो बैलों की कथा",
+"2. क्या लिखूँ?",
+"3. संवादहीन",
+"4. ऐसी भी बातें होती हैं",
+"5. आखिरी चट्टान तक",
+"6. रीढ़ की हड्डी",
+"7. मैं और मेरा देश",
+"8. पद",
+"9. राम-लक्ष्मण-परशुराम संवाद",
+"10. भारति, जय, विजय करे!",
+"11. झाँसी की रानी",
+"12. घर की याद"
+]
+}
 
 },
 
+10: {
 
-"Class 10": {
-
-"📐 Mathematics": [
-
+"Mathematics": {
+book:"Mathematics",
+chapters:[
 "1. Real Numbers",
 "2. Polynomials",
 "3. Pair of Linear Equations in Two Variables",
@@ -704,784 +736,470 @@ const syllabus = {
 "12. Surface Areas and Volumes",
 "13. Statistics",
 "14. Probability"
+]
+},
 
-],
-
-"🔬 Science": [
-
+"Science": {
+book:"Science",
+chapters:[
 "1. Chemical Reactions and Equations",
 "2. Acids, Bases and Salts",
 "3. Metals and Non-metals",
 "4. Carbon and its Compounds",
-"5. Life Processes",
-"6. Control and Coordination",
-"7. How do Organisms Reproduce?",
-"8. Heredity",
-"9. Light – Reflection and Refraction",
-"10. The Human Eye and the Colourful World",
-"11. Electricity",
-"12. Magnetic Effects of Electric Current",
-"13. Our Environment"
-
-],
-
-"🌍 Social Science": [
-
-"1. The Rise of Nationalism in Europe",
-"2. Nationalism in India",
-"3. The Making of a Global World",
-"4. The Age of Industrialisation",
-"5. Print Culture and the Modern World",
-"6. Resources and Development",
-"7. Forest and Wildlife Resources",
-"8. Water Resources",
-"9. Agriculture",
-"10. Minerals and Energy Resources",
-"11. Manufacturing Industries",
-"12. Lifelines of National Economy",
-"13. Power Sharing",
-"14. Federalism",
-"15. Gender, Religion and Caste",
-"16. Political Parties",
-"17. Outcomes of Democracy",
-"18. Development",
-"19. Sectors of the Indian Economy",
-"20. Money and Credit",
-"21. Globalisation and the Indian Economy",
-"22. Consumer Rights"
-
-],
-
-"📖 English": [
-
-"Reading Skills",
-"Writing Skills",
-"Grammar",
-"Literature",
-"First Flight",
-"Footprints Without Feet",
-"Speaking Skills",
-"Listening Skills"
-
-],
-
-"📝 Hindi": [
-
-"अपठित बोध",
-"व्याकरण",
-"लेखन",
-"क्षितिज भाग 2",
-"कृतिका भाग 2",
-"मौखिक अभिव्यक्ति",
-"श्रवण कौशल",
-"पठन कौशल"
-
+"5. Periodic Classification of Elements",
+"6. Life Processes",
+"7. Control and Coordination",
+"8. How Do Organisms Reproduce?",
+"9. Heredity and Evolution",
+"10. Light – Reflection and Refraction",
+"11. The Human Eye and the Colourful World",
+"12. Electricity",
+"13. Magnetic Effects of Electric Current",
+"14. Sources of Energy",
+"15. Our Environment",
+"16. Management of Natural Resources"
 ]
+},
+
+"Social Science": {
+book:"NCERT Social Science",
+chapters:[
+"History 1. The Rise of Nationalism in Europe",
+"History 2. Nationalism in India",
+"History 3. The Making of a Global World",
+"History 4. The Age of Industrialisation",
+"History 5. Print Culture and the Modern World",
+"Geography 1. Resources and Development",
+"Geography 2. Forest and Wildlife Resources",
+"Geography 3. Water Resources",
+"Geography 4. Agriculture",
+"Geography 5. Minerals and Energy Resources",
+"Geography 6. Manufacturing Industries",
+"Geography 7. Lifelines of National Economy",
+"Political Science 1. Power-sharing",
+"Political Science 2. Federalism",
+"Political Science 3. Gender, Religion and Caste",
+"Political Science 4. Political Parties",
+"Political Science 5. Outcomes of Democracy",
+"Economics 1. Development",
+"Economics 2. Sectors of the Indian Economy",
+"Economics 3. Money and Credit",
+"Economics 4. Globalisation and the Indian Economy",
+"Economics 5. Consumer Rights"
+]
+},
+
+"English": {
+book:"NCERT English",
+chapters:[
+"First Flight 1. A Letter to God",
+"First Flight 2. Nelson Mandela: Long Walk to Freedom",
+"First Flight 3. Two Stories about Flying",
+"First Flight 4. From the Diary of Anne Frank",
+"First Flight 5. Glimpses of India",
+"First Flight 6. Mijbil the Otter",
+"First Flight 7. Madam Rides the Bus",
+"First Flight 8. The Sermon at Benares",
+"First Flight 9. The Proposal",
+"Footprints Without Feet 1. A Triumph of Surgery",
+"Footprints Without Feet 2. The Thief's Story",
+"Footprints Without Feet 3. The Midnight Visitor",
+"Footprints Without Feet 4. A Question of Trust",
+"Footprints Without Feet 5. Footprints without Feet",
+"Footprints Without Feet 6. The Making of a Scientist",
+"Footprints Without Feet 7. The Necklace",
+"Footprints Without Feet 8. Bholi",
+"Footprints Without Feet 9. The Book That Saved the Earth"
+]
+},
+
+"Hindi": {
+book:"NCERT Hindi",
+chapters:[
+"क्षितिज 1. सूरदास",
+"क्षितिज 2. राम-लक्ष्मण-परशुराम संवाद",
+"क्षितिज 3. आत्मकथ्य",
+"क्षितिज 4. उत्साह और अट नहीं रही है",
+"क्षितिज 5. यह दंतुरित मुस्कान और फसल",
+"क्षितिज 6. संगतकार",
+"क्षितिज 7. नेताजी का चश्मा",
+"क्षितिज 8. बालगोबिन भगत",
+"क्षितिज 9. लखनवी अंदाज़",
+"क्षितिज 10. मानवीय करुणा की दिव्य चमक",
+"कृतिका 1. माता का आँचल",
+"कृतिका 2. जॉर्ज पंचम की नाक",
+"कृतिका 3. साना-साना हाथ जोड़ि",
+"कृतिका 4. एही ठैयाँ झुलनी हेरानी हो रामा!",
+"कृतिका 5. मैं क्यों लिखता हूँ?"
+]
+}
 
 }
 
 };
 
 
-/* =========================
-   CLASS 9 HALF YEARLY
-========================= */
+/* =========================================================
+   STORAGE
+========================================================= */
 
-const class9Half = {
+let progress = JSON.parse(localStorage.getItem("ayuProgress") || "{}");
 
-"📐 Mathematics — Ganita Manjari": 8,
-
-"🔬 Science — Exploration": [
-
-"2. Cell: The Building Block of Life",
-
-"3. Tissues in Action",
-
-"4. Describing Motion Around Us",
-
-"5. Exploring Mixtures and their Separation",
-
-"6. How Forces Affect Motion",
-
-"8. Journey Inside the Atom"
-
-],
-
-"🌍 Social Science — Understanding Society: India and Beyond Part 1":"HALF",
-
-"📖 English — Kaveri":8,
-
-"📝 Hindi — Ganga":6
-
-};
+let settings = JSON.parse(localStorage.getItem("ayuSettings") || "{}");
 
 
-/* =========================
-   SAVED DATA
-========================= */
+/* =========================================================
+   HALF YEARLY RULES
+========================================================= */
 
-let data =
-JSON.parse(
-localStorage.getItem("ayushStudyTracker")
-) || {
+function getActiveChapters(classNo, subject, examType){
 
-name:"",
+    const all = syllabus[classNo][subject].chapters;
 
-className:"Class 9",
+    if(examType === "final"){
+        return all;
+    }
 
-examType:"Half-Yearly",
+    /* CLASS 9 CUSTOM HALF-YEARLY SYLLABUS */
 
-target:120,
+    if(classNo == 9){
 
-studyToday:0,
+        if(subject === "Mathematics"){
+            return all.slice(0,8);
+        }
 
-halfYearlyDate:"",
+        if(subject === "Social Science"){
+            return all.slice(0,9);
+        }
 
-finalDate:"",
+        if(subject === "Science"){
+            return [
+                all[1], // Cell
+                all[2], // Tissues
+                all[4], // Mixtures
+                all[5], // Forces
+                all[7]  // Atom
+            ];
+        }
 
-completed:{},
+        /* Kaveri and Ganga: first half */
+        if(subject === "English"){
+            return all.slice(0,8);
+        }
 
-lastDate:""
+        if(subject === "Hindi"){
+            return all.slice(0,6);
+        }
+    }
 
-};
+    /* CLASS 10:
+       Half Yearly = first half of final syllabus
+    */
 
+    if(classNo == 10){
+        return all.slice(0, Math.ceil(all.length / 2));
+    }
 
-/* =========================
-   SAVE
-========================= */
-
-function save(){
-
-localStorage.setItem(
-"ayushStudyTracker",
-JSON.stringify(data)
-);
-
+    return all;
 }
 
 
-/* =========================
-   NEW DAY
-========================= */
-
-function checkDay(){
-
-const today =
-new Date()
-.toISOString()
-.split("T")[0];
-
-if(data.lastDate!==today){
-
-data.studyToday=0;
-
-data.lastDate=today;
-
-save();
-
-}
-
-}
-
-
-/* =========================
-   EXAM TOPICS
-========================= */
-
-function getTopics(){
-
-const all =
-syllabus[data.className];
-
-const result={};
-
-
-for(const subject in all){
-
-const chapters=all[subject];
-
-
-if(data.examType==="Final"){
-
-result[subject]=
-chapters.slice();
-
-continue;
-
-}
-
-
-if(data.className==="Class 9"){
-
-const rule=
-class9Half[subject];
-
-
-if(Array.isArray(rule)){
-
-result[subject]=
-chapters.filter(
-x=>rule.includes(x)
-);
-
-}
-
-else if(rule==="HALF"){
-
-result[subject]=
-chapters.slice(
-0,
-Math.ceil(chapters.length/2)
-);
-
-}
-
-else{
-
-result[subject]=
-chapters.slice(0,rule);
-
-}
-
-}
-
-else{
-
-result[subject]=
-chapters.slice(
-0,
-Math.ceil(chapters.length/2)
-);
-
-}
-
-}
-
-return result;
-
-}
-
-
-/* =========================
-   PROGRESS
-========================= */
-
-function getProgress(){
-
-const topics=getTopics();
-
-let total=0;
-
-let completed=0;
-
-
-for(const subject in topics){
-
-topics[subject].forEach(
-chapter=>{
-
-total++;
-
-const key=
-data.className+
-"|" +
-data.examType+
-"|" +
-subject+
-"|" +
-chapter;
-
-if(data.completed[key]){
-
-completed++;
-
-}
-
-});
-
-}
-
-
-return {
-
-total,
-
-completed,
-
-percent:
-total===0
-?0
-:Math.round(
-completed/total*100
-)
-
-};
-
-}
-
-
-/* =========================
-   DAYS
-========================= */
-
-function getDate(){
-
-return data.examType==="Final"
-?data.finalDate
-:data.halfYearlyDate;
-
-}
-
-
-function daysLeft(){
-
-const date=getDate();
-
-if(!date)return null;
-
-const exam=
-new Date(
-date+"T23:59:59"
-);
-
-return Math.max(
-0,
-Math.ceil(
-(exam-new Date())/
-86400000
-)
-);
-
-}
-
-
-/* =========================
-   RATE
-========================= */
-
-function rate(){
-
-const p=getProgress();
-
-const days=daysLeft();
-
-if(!days)return null;
-
-return Math.ceil(
-(p.total-p.completed)/
-days
-);
-
-}
-
-
-/* =========================
-   RENDER
-========================= */
-
-function render(){
-
-const box=
-document.getElementById(
-"subjects"
-);
-
-box.innerHTML="";
-
-
-const topics=getTopics();
-
-
-for(const subject in topics){
-
-const subjectBox=
-document.createElement("div");
-
-subjectBox.className=
-"subject";
-
-
-const header=
-document.createElement("div");
-
-header.className=
-"subject-header";
-
-header.innerHTML=
-`<h3>${subject}</h3>
-<span>${topics[subject].length} Topics</span>`;
-
-subjectBox.appendChild(header);
-
-
-topics[subject].forEach(
-chapter=>{
-
-const row=
-document.createElement("label");
-
-row.className=
-"chapter";
-
-
-const check=
-document.createElement("input");
-
-check.type="checkbox";
-
-
-const key=
-data.className+
-"|" +
-data.examType+
-"|" +
-subject+
-"|" +
-chapter;
-
-
-check.checked=
-!!data.completed[key];
-
-
-if(check.checked){
-
-row.classList.add(
-"completed"
-);
-
-}
-
-
-check.addEventListener(
-"change",
-()=>{
-
-data.completed[key]=
-check.checked;
-
-if(check.checked){
-
-row.classList.add(
-"completed"
-);
-
-}else{
-
-row.classList.remove(
-"completed"
-);
-
-}
-
-save();
-
-update();
-
-});
-
-
-const text=
-document.createElement("span");
-
-text.textContent=chapter;
-
-
-row.appendChild(check);
-
-row.appendChild(text);
-
-subjectBox.appendChild(row);
-
-});
-
-box.appendChild(subjectBox);
-
-}
-
-}
-
-
-/* =========================
-   UPDATE
-========================= */
-
-function update(){
-
-const p=getProgress();
-
-document.getElementById(
-"totalChapters"
-).textContent=p.total;
-
-document.getElementById(
-"completedChapters"
-).textContent=p.completed;
-
-document.getElementById(
-"progressText"
-).textContent=
-p.percent+"%";
-
-document.getElementById(
-"progressBar"
-).style.width=
-p.percent+"%";
-
-document.getElementById(
-"currentExam"
-).textContent=
-data.examType;
-
-document.getElementById(
-"syllabusTitle"
-).textContent=
-data.examType+
-" Syllabus";
-
-
-const days=daysLeft();
-
-document.getElementById(
-"daysRemaining"
-).textContent=
-days===null
-?"—"
-:days+" days";
-
-
-const r=rate();
-
-document.getElementById(
-"requiredRate"
-).textContent=
-r===null
-?"—"
-:r+" topics/day";
-
-
-document.getElementById(
-"studyToday"
-).textContent=
-data.studyToday+
-" minutes";
-
-
-document.getElementById(
-"targetDisplay"
-).textContent=
-data.target+
-" minutes";
-
-}
-
-
-/* =========================
-   LOAD
-========================= */
-
-document.getElementById(
-"studentName"
-).value=data.name;
-
-document.getElementById(
-"studentClass"
-).value=data.className;
-
-document.getElementById(
-"dailyTarget"
-).value=data.target;
-
-document.getElementById(
-"examType"
-).value=data.examType;
-
-document.getElementById(
-"halfYearlyDate"
-).value=data.halfYearlyDate;
-
-document.getElementById(
-"finalDate"
-).value=data.finalDate;
-
-
-/* =========================
+/* =========================================================
    SAVE DETAILS
-========================= */
+========================================================= */
 
-document.getElementById(
-"saveDetails"
-).onclick=()=>{
+function saveDetails(){
 
-data.name=
-document.getElementById(
-"studentName"
-).value;
+    settings.name = document.getElementById("studentName").value;
+    settings.classNo = document.getElementById("classSelect").value;
+    settings.exam = document.getElementById("examType").value;
+    settings.date = document.getElementById("examDate").value;
+    settings.dailyTarget = document.getElementById("dailyTarget").value;
 
-data.className=
-document.getElementById(
-"studentClass"
-).value;
+    localStorage.setItem("ayuSettings",JSON.stringify(settings));
 
-data.target=
-Number(
-document.getElementById(
-"dailyTarget"
-).value
-)||0;
+    updateApp();
 
-save();
-
-render();
-
-update();
-
-alert(
-"✅ Ayush Study Tracker saved!"
-);
-
-};
+    alert("✅ Details saved successfully!");
+}
 
 
-/* =========================
-   CLASS
-========================= */
+function saveData(){
 
-document.getElementById(
-"studentClass"
-).onchange=e=>{
+    settings.name = document.getElementById("studentName").value;
+    settings.classNo = document.getElementById("classSelect").value;
+    settings.exam = document.getElementById("examType").value;
+    settings.date = document.getElementById("examDate").value;
+    settings.dailyTarget = document.getElementById("dailyTarget").value;
 
-data.className=e.target.value;
-
-save();
-
-render();
-
-update();
-
-};
+    localStorage.setItem("ayuSettings",JSON.stringify(settings));
+}
 
 
-/* =========================
-   EXAM
-========================= */
+/* =========================================================
+   CHANGE CLASS
+========================================================= */
 
-document.getElementById(
-"examType"
-).onchange=e=>{
+function changeClass(){
 
-data.examType=e.target.value;
+    settings.classNo = document.getElementById("classSelect").value;
 
-save();
+    localStorage.setItem("ayuSettings",JSON.stringify(settings));
 
-render();
-
-update();
-
-};
+    updateApp();
+}
 
 
-/* =========================
-   DATES
-========================= */
+/* =========================================================
+   UPDATE APP
+========================================================= */
 
-document.getElementById(
-"halfYearlyDate"
-).onchange=e=>{
+function updateApp(){
 
-data.halfYearlyDate=e.target.value;
+    const classNo = Number(document.getElementById("classSelect").value);
+    const exam = document.getElementById("examType").value;
 
-save();
+    renderSubjects();
+    updateStats();
 
-update();
+    let dateText = document.getElementById("examDate").value;
 
-};
+    let examName = exam === "half"
+        ? "Half Yearly Exam"
+        : "Final Exam";
 
-
-document.getElementById(
-"finalDate"
-).onchange=e=>{
-
-data.finalDate=e.target.value;
-
-save();
-
-update();
-
-};
+    document.getElementById("examInfo").innerHTML =
+        "📅 <strong>"+examName+"</strong> selected for Class "+classNo+
+        (dateText ? " • Exam Date: "+dateText : "")+
+        "<br><br>📊 Progress percentage is calculated from the active syllabus.";
+}
 
 
-/* =========================
-   STUDY TIME
-========================= */
+/* =========================================================
+   RENDER SUBJECTS
+========================================================= */
 
-document.getElementById(
-"addStudy"
-).onclick=()=>{
+function renderSubjects(){
 
-const input=
-document.getElementById(
-"studyMinutes"
-);
+    const container = document.getElementById("subjects");
 
-const minutes=
-Number(input.value);
+    const classNo = Number(document.getElementById("classSelect").value);
+    const exam = document.getElementById("examType").value;
 
-if(!minutes||minutes<=0){
+    const filter = document.getElementById("subjectFilter").value;
+    const search = document.getElementById("searchBox").value.toLowerCase();
 
-alert(
-"Study minutes enter karo."
-);
+    container.innerHTML = "";
 
-return;
+    const subjects = syllabus[classNo];
+
+    Object.keys(subjects).forEach(subject => {
+
+        if(filter !== "all" && filter !== subject) return;
+
+        const chapters = getActiveChapters(classNo,subject,exam);
+
+        const filtered = chapters.filter(ch =>
+            ch.toLowerCase().includes(search)
+        );
+
+        if(filtered.length === 0) return;
+
+        let completed = 0;
+
+        filtered.forEach(ch => {
+
+            const key = classNo+"_"+exam+"_"+subject+"_"+ch;
+
+            if(progress[key]) completed++;
+
+        });
+
+        const percent = filtered.length
+            ? Math.round(completed/filtered.length*100)
+            : 0;
+
+        const box = document.createElement("div");
+        box.className = "subject";
+
+        box.innerHTML = `
+            <div class="subject-head">
+                <div>
+                    <div class="subject-title">${subject}</div>
+                    <small style="color:var(--muted)">
+                        ${subjects[subject].book}
+                    </small>
+                </div>
+
+                <div class="subject-progress">
+                    ${percent}%
+                </div>
+            </div>
+
+            <div class="chapter-list" id="list-${classNo}-${subject.replace(/\s/g,'')}"></div>
+        `;
+
+        container.appendChild(box);
+
+        const list = box.querySelector(".chapter-list");
+
+        filtered.forEach(ch => {
+
+            const key = classNo+"_"+exam+"_"+subject+"_"+ch;
+
+            const row = document.createElement("label");
+            row.className = "chapter";
+
+            if(progress[key]){
+                row.classList.add("done");
+            }
+
+            row.innerHTML = `
+                <input type="checkbox"
+                    ${progress[key] ? "checked" : ""}
+                    onchange="toggleChapter('${encodeURIComponent(key)}')">
+
+                <span>${ch}</span>
+                ${progress[key] ? '<span class="badge">Completed</span>' : ''}
+            `;
+
+            list.appendChild(row);
+        });
+
+    });
 
 }
 
-data.studyToday+=minutes;
 
-save();
+/* =========================================================
+   CHECKBOX
+========================================================= */
 
-update();
+function toggleChapter(encodedKey){
 
-input.value="";
+    const key = decodeURIComponent(encodedKey);
 
-};
+    progress[key] = !progress[key];
 
+    localStorage.setItem("ayuProgress",JSON.stringify(progress));
 
-/* =========================
-   RESET
-========================= */
-
-document.getElementById(
-"resetBtn"
-).onclick=()=>{
-
-if(
-confirm(
-"Saara progress delete karna hai?"
-)
-){
-
-localStorage.removeItem(
-"ayushStudyTracker"
-);
-
-location.reload();
-
+    renderSubjects();
+    updateStats();
 }
 
-};
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+    const classNo = Number(document.getElementById("classSelect").value);
+    const exam = document.getElementById("examType").value;
+
+    let total = 0;
+    let completed = 0;
+
+    Object.keys(syllabus[classNo]).forEach(subject => {
+
+        const chapters = getActiveChapters(classNo,subject,exam);
+
+        total += chapters.length;
+
+        chapters.forEach(ch => {
+
+            const key = classNo+"_"+exam+"_"+subject+"_"+ch;
+
+            if(progress[key]){
+                completed++;
+            }
+
+        });
+
+    });
+
+    const percent = total
+        ? Math.round(completed/total*100)
+        : 0;
+
+    document.getElementById("overallProgress").innerText = percent+"%";
+    document.getElementById("completedCount").innerText = completed;
+    document.getElementById("totalCount").innerText = total;
+    document.getElementById("remainingCount").innerText = total-completed;
+
+    document.getElementById("overallBar").style.width = percent+"%";
+}
 
 
-/* =========================
+/* =========================================================
+   THEME
+========================================================= */
+
+function toggleTheme(){
+
+    document.body.classList.toggle("light");
+
+    const light = document.body.classList.contains("light");
+
+    localStorage.setItem("ayuTheme",light ? "light" : "dark");
+
+    document.getElementById("themeBtn").innerText =
+        light ? "☀️ Light" : "🌙 Dark";
+}
+
+
+/* =========================================================
+   RESOURCE
+========================================================= */
+
+function openResource(url){
+
+    window.open(url,"_blank");
+}
+
+
+/* =========================================================
+   LOAD SAVED DATA
+========================================================= */
+
+function loadData(){
+
+    if(settings.name){
+        document.getElementById("studentName").value = settings.name;
+    }
+
+    if(settings.classNo){
+        document.getElementById("classSelect").value = settings.classNo;
+    }
+
+    if(settings.exam){
+        document.getElementById("examType").value = settings.exam;
+    }
+
+    if(settings.date){
+        document.getElementById("examDate").value = settings.date;
+    }
+
+    if(settings.dailyTarget){
+        document.getElementById("dailyTarget").value = settings.dailyTarget;
+    }
+
+    const theme = localStorage.getItem("ayuTheme");
+
+    if(theme === "light"){
+        document.body.classList.add("light");
+        document.getElementById("themeBtn").innerText = "☀️ Light";
+    }
+
+    updateApp();
+}
+
+
+/* =========================================================
    START
-========================= */
+========================================================= */
 
-checkDay();
-
-render();
-
-update();
+loadData();
 
 </script>
 

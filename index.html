@@ -3,99 +3,266 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#111827">
+
   <title>Ayu Study Tracker</title>
+
+  <meta name="description"
+        content="Technical Ayu Study Tracker - Class 9 daily study planner">
+
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">A</div>
-      <div>
-        <h1>Ayu Study Tracker</h1>
-        <p>Class 9 • Simple daily preparation planner</p>
-      </div>
+
+<header class="topbar">
+
+  <div class="brand">
+
+    <div class="logo">A</div>
+
+    <div>
+      <h1>Ayu Study Tracker</h1>
+      <p>Class 9 • Smart Study Planner</p>
     </div>
-    <button id="themeBtn" class="ghost">☀️ Light</button>
-  </header>
 
-  <main class="container">
-    <section class="hero">
-      <h2>Your Study Dashboard</h2>
-      <p>Track chapters, set targets and keep your preparation organised.</p>
-    </section>
+  </div>
 
-    <section class="card setup">
-      <h2>Student Details</h2>
-      <div class="grid">
-        <label>Student name
-          <input id="studentName" placeholder="e.g. Ayush">
-        </label>
-        <label>Class
-          <select id="studentClass">
-            <option>Class 9</option>
-            <option>Class 10</option>
-          </select>
-        </label>
-        <label>Exam date
-          <input id="examDate" type="date">
-        </label>
+  <button id="themeBtn" class="theme-btn">
+    ☀️ Light
+  </button>
+
+</header>
+
+
+<main class="container">
+
+  <section class="hero">
+
+    <h2>Your Study Dashboard</h2>
+
+    <p>
+      Track your chapters, daily targets and study progress
+      in one simple place.
+    </p>
+
+  </section>
+
+
+  <!-- STUDENT DETAILS -->
+
+  <section class="card">
+
+    <h2>👨‍🎓 Student Details</h2>
+
+    <label>Student Name</label>
+
+    <input
+      id="studentName"
+      type="text"
+      placeholder="Enter your name"
+    >
+
+    <label>Class</label>
+
+    <select id="studentClass">
+
+      <option value="Class 9">Class 9</option>
+      <option value="Class 10">Class 10</option>
+
+    </select>
+
+    <label>Daily Study Target (minutes)</label>
+
+    <input
+      id="dailyTarget"
+      type="number"
+      min="1"
+      placeholder="Example: 120"
+    >
+
+    <button id="saveDetails" class="primary-btn">
+      Save Details
+    </button>
+
+  </section>
+
+
+  <!-- STATS -->
+
+  <section class="stats">
+
+    <div class="stat-card">
+
+      <span>📚</span>
+
+      <h3 id="totalChapters">0</h3>
+
+      <p>Total Chapters</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <span>✅</span>
+
+      <h3 id="completedChapters">0</h3>
+
+      <p>Completed</p>
+
+    </div>
+
+
+    <div class="stat-card">
+
+      <span>📊</span>
+
+      <h3 id="progressPercent">0%</h3>
+
+      <p>Progress</p>
+
+    </div>
+
+  </section>
+
+
+  <!-- PROGRESS -->
+
+  <section class="card">
+
+    <div class="section-title">
+
+      <div>
+        <h2>📊 Overall Progress</h2>
+        <p>Your Class 9 preparation progress</p>
       </div>
-      <button id="saveProfile" class="primary">Save Details</button>
-    </section>
 
-    <section class="stats">
-      <div class="stat"><b id="totalCount">0</b><span>Total topics</span></div>
-      <div class="stat"><b id="doneCount">0</b><span>Completed</span></div>
-      <div class="stat"><b id="progressCount">0%</b><span>Progress</span></div>
-      <div class="stat"><b id="todayCount">0</b><span>Done today</span></div>
-    </section>
+      <strong id="progressText">0%</strong>
 
-    <section class="card">
-      <div class="sectionHead">
-        <div>
-          <h2>My Study Topics</h2>
-          <p id="welcome">Add your first topic below.</p>
-        </div>
-        <select id="filter">
-          <option value="all">All</option>
-          <option value="todo">Not done</option>
-          <option value="done">Completed</option>
-        </select>
+    </div>
+
+    <div class="progress-bar">
+
+      <div
+        id="progressBar"
+        class="progress-fill">
       </div>
 
-      <div class="addRow">
-        <select id="subject">
-          <option>Mathematics</option>
-          <option>Science</option>
-          <option>English</option>
-          <option>Social Science</option>
-          <option>Hindi</option>
-          <option>Computer</option>
-        </select>
-        <input id="topic" placeholder="Topic / chapter name">
-        <button id="addBtn" class="primary">+ Add</button>
+    </div>
+
+  </section>
+
+
+  <!-- DAILY TARGET -->
+
+  <section class="card">
+
+    <h2>🎯 Today's Study Target</h2>
+
+    <div class="target-box">
+
+      <div>
+
+        <span id="targetDisplay">
+          0 minutes
+        </span>
+
+        <small>
+          Daily target
+        </small>
+
       </div>
 
-      <div id="topicList" class="topicList"></div>
-    </section>
+      <div>
 
-    <section class="card">
-      <h2>Daily Target</h2>
-      <div class="targetBox">
-        <input id="targetInput" type="number" min="1" max="20" value="3">
-        <span>topics per day</span>
-        <button id="saveTarget" class="primary">Save Target</button>
+        <span id="studyToday">
+          0 minutes
+        </span>
+
+        <small>
+          Studied today
+        </small>
+
       </div>
-      <div class="progress"><div id="bar"></div></div>
-      <p id="targetText">0 / 3 completed today</p>
-    </section>
-  </main>
 
-  <footer>
-    <p>Made by <strong>Technical Ayu</strong> • Ayu Study Tracker</p>
-  </footer>
+    </div>
 
-  <script src="app.js"></script>
+
+    <label>Add Study Time (minutes)</label>
+
+    <input
+      id="studyMinutes"
+      type="number"
+      min="1"
+      placeholder="Example: 30"
+    >
+
+    <button id="addStudy" class="primary-btn">
+      ➕ Add Study Time
+    </button>
+
+  </section>
+
+
+  <!-- SUBJECTS -->
+
+  <section class="card">
+
+    <div class="section-title">
+
+      <div>
+
+        <h2>📚 Class 9 Subjects</h2>
+
+        <p>
+          Mark chapters as completed
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div id="subjects"></div>
+
+  </section>
+
+
+  <!-- RESET -->
+
+  <section class="card danger-card">
+
+    <h2>⚙️ Data Settings</h2>
+
+    <p>
+      Your data is stored locally in this browser.
+    </p>
+
+    <button id="resetBtn" class="danger-btn">
+      Reset All Data
+    </button>
+
+  </section>
+
+</main>
+
+
+<footer>
+
+  <h3>Technical Ayu</h3>
+
+  <p>
+    Built with ❤️ by Technical Ayu
+  </p>
+
+  <p class="copyright">
+    © 2026 Technical Ayu • Ayu Study Tracker
+  </p>
+
+</footer>
+
+
+<script src="app.js"></script>
+
 </body>
 </html>

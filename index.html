@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,14 +7,36 @@
 
 <title>Ayu Study Tracker – Class 9 & 10 Study Planner</title>
 
-<meta name="description" content="Ayu Study Tracker is a simple Class 9 and Class 10 study planner with NCERT syllabus, chapter tracking, exam preparation, progress percentage and study resources.">
+<meta name="description" content="Ayu Study Tracker is a Class 9 and Class 10 study planner for NCERT syllabus, chapter tracking, Half Yearly and Final Exam preparation, progress percentage and official NCERT study resources.">
 
-<meta name="keywords" content="Ayu Study Tracker, Class 9 study tracker, Class 10 study tracker, NCERT syllabus, NCERT study planner">
+<meta name="keywords" content="Ayu Study Tracker, Ayu Study Tracker Class 9, Ayu Study Tracker Class 10, Class 9 study tracker, Class 10 study tracker, NCERT study planner">
 
 <meta name="author" content="Ayush">
 <meta name="robots" content="index, follow">
+<meta name="googlebot" content="index, follow, max-image-preview:large">
 
 <link rel="canonical" href="https://technicalayu001-cell.github.io/Ayu-Study-Tracker/">
+
+<!-- Social / Search preview -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ayu Study Tracker – Class 9 & 10 Study Planner">
+<meta property="og:description" content="Track your Class 9 and 10 NCERT syllabus, chapters, exams and study progress with Ayu Study Tracker.">
+<meta property="og:url" content="https://technicalayu001-cell.github.io/Ayu-Study-Tracker/">
+<meta property="og:site_name" content="Ayu Study Tracker">
+
+<!-- Structured data for search engines -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebApplication",
+  "name":"Ayu Study Tracker",
+  "alternateName":"Ayu Study Tracker – Class 9 & 10 Study Planner",
+  "url":"https://technicalayu001-cell.github.io/Ayu-Study-Tracker/",
+  "description":"A study planner for Class 9 and Class 10 students with NCERT syllabus tracking, exam preparation and progress monitoring.",
+  "applicationCategory":"EducationalApplication",
+  "operatingSystem":"Any"
+}
+</script>
 
 <style>
 *{
@@ -79,14 +102,16 @@ header{
 .logo{
     width:58px;
     height:58px;
-    border-radius:17px;
-    background:var(--primary);
-    color:#052033;
+    border-radius:18px;
+    background:linear-gradient(135deg,#38bdf8,#0284c7);
+    color:white;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:30px;
+    font-size:28px;
     font-weight:900;
+    box-shadow:0 8px 25px rgba(2,132,199,.30);
+    border:2px solid rgba(255,255,255,.15);
 }
 
 .brand h1{
@@ -411,7 +436,7 @@ footer{
 <div class="header-inner">
 
 <div class="brand">
-<div class="logo">A</div>
+<div class="logo" aria-label="Ayu Study Tracker logo">A</div>
 <div>
 <h1>Ayu Study Tracker</h1>
 <p>Class 9 & 10 • Smart Study Planner</p>
@@ -429,7 +454,10 @@ footer{
 
 <section class="hero">
 <h2>Your Study Dashboard</h2>
-<p>Track chapters, prepare for exams and monitor your progress.</p>
+<p>
+<strong>Ayu Study Tracker</strong> helps you track chapters,
+prepare for exams and monitor your study progress.
+</p>
 </section>
 
 <section class="card">
@@ -534,11 +562,11 @@ Select your exam to see the active syllabus.
 
 <section class="card">
 
-<h2>📖 NCERT Resources</h2>
+<h2>📖 Official NCERT Resources</h2>
 
 <div class="tip" style="margin-bottom:18px;">
-Official NCERT/ePathshala resources can be opened from here. 
-The app keeps the resource section in one place so you don't have to search for every book separately.
+These buttons open official NCERT textbook pages. The books remain hosted by
+NCERT rather than being copied into this website.
 </div>
 
 <div class="resource-grid">
@@ -546,48 +574,48 @@ The app keeps the resource section in one place so you don't have to search for 
 <div class="resource">
 <h3>📘 Class 9 Mathematics</h3>
 <p>Ganita Manjari – Part 1</p>
-<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0904')">
-Open Book
+<button onclick="openResource('https://ncert.nic.in/textbook.php?iemh1=ps-15')">
+Open NCERT Book
 </button>
 </div>
 
 <div class="resource">
 <h3>🔬 Class 9 Science</h3>
 <p>Exploration</p>
-<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0906')">
-Open Book
+<button onclick="openResource('https://ncert.nic.in/textbook.php?iesc1=9-12')">
+Open NCERT Book
 </button>
 </div>
 
 <div class="resource">
 <h3>🌍 Class 9 Social Science</h3>
-<p>Understanding Society: India and Beyond – Part 1</p>
-<button onclick="openResource('https://epathshala.nic.in/')">
-Open Resource
+<p>Exploring Society: India and Beyond – Part I</p>
+<button onclick="openResource('https://ncert.nic.in/textbook.php?hees1=3-7')">
+Open NCERT Book
 </button>
 </div>
 
 <div class="resource">
 <h3>📕 Class 9 English</h3>
 <p>Kaveri</p>
-<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0903')">
-Open Book
+<button onclick="openResource('https://ncert.nic.in/textbook.php')">
+Open NCERT Textbooks
 </button>
 </div>
 
 <div class="resource">
 <h3>📗 Class 9 Hindi</h3>
 <p>Ganga</p>
-<button onclick="openResource('https://epathshala.nic.in/topicc.php?id=0901')">
-Open Book
+<button onclick="openResource('https://ncert.nic.in/textbook.php')">
+Open NCERT Textbooks
 </button>
 </div>
 
 <div class="resource">
 <h3>📚 Class 10 NCERT</h3>
-<p>Official NCERT ePathshala resources</p>
-<button onclick="openResource('https://epathshala.nic.in/')">
-Open Resources
+<p>Official NCERT textbook resources</p>
+<button onclick="openResource('https://ncert.nic.in/textbook.php')">
+Open NCERT Textbooks
 </button>
 </div>
 
@@ -617,11 +645,6 @@ Open Resources
 </footer>
 
 <script>
-
-/* =========================================================
-   AYU STUDY TRACKER
-   Data + Syllabus
-========================================================= */
 
 const syllabus = {
 
@@ -838,19 +861,8 @@ chapters:[
 
 };
 
-
-/* =========================================================
-   STORAGE
-========================================================= */
-
 let progress = JSON.parse(localStorage.getItem("ayuProgress") || "{}");
-
 let settings = JSON.parse(localStorage.getItem("ayuSettings") || "{}");
-
-
-/* =========================================================
-   HALF YEARLY RULES
-========================================================= */
 
 function getActiveChapters(classNo, subject, examType){
 
@@ -859,8 +871,6 @@ function getActiveChapters(classNo, subject, examType){
     if(examType === "final"){
         return all;
     }
-
-    /* CLASS 9 CUSTOM HALF-YEARLY SYLLABUS */
 
     if(classNo == 9){
 
@@ -874,15 +884,14 @@ function getActiveChapters(classNo, subject, examType){
 
         if(subject === "Science"){
             return [
-                all[1], // Cell
-                all[2], // Tissues
-                all[4], // Mixtures
-                all[5], // Forces
-                all[7]  // Atom
+                all[1],
+                all[2],
+                all[4],
+                all[5],
+                all[7]
             ];
         }
 
-        /* Kaveri and Ganga: first half */
         if(subject === "English"){
             return all.slice(0,8);
         }
@@ -892,21 +901,12 @@ function getActiveChapters(classNo, subject, examType){
         }
     }
 
-    /* CLASS 10:
-       Half Yearly = first half of final syllabus
-    */
-
     if(classNo == 10){
         return all.slice(0, Math.ceil(all.length / 2));
     }
 
     return all;
 }
-
-
-/* =========================================================
-   SAVE DETAILS
-========================================================= */
 
 function saveDetails(){
 
@@ -923,7 +923,6 @@ function saveDetails(){
     alert("✅ Details saved successfully!");
 }
 
-
 function saveData(){
 
     settings.name = document.getElementById("studentName").value;
@@ -935,11 +934,6 @@ function saveData(){
     localStorage.setItem("ayuSettings",JSON.stringify(settings));
 }
 
-
-/* =========================================================
-   CHANGE CLASS
-========================================================= */
-
 function changeClass(){
 
     settings.classNo = document.getElementById("classSelect").value;
@@ -948,11 +942,6 @@ function changeClass(){
 
     updateApp();
 }
-
-
-/* =========================================================
-   UPDATE APP
-========================================================= */
 
 function updateApp(){
 
@@ -973,11 +962,6 @@ function updateApp(){
         (dateText ? " • Exam Date: "+dateText : "")+
         "<br><br>📊 Progress percentage is calculated from the active syllabus.";
 }
-
-
-/* =========================================================
-   RENDER SUBJECTS
-========================================================= */
 
 function renderSubjects(){
 
@@ -1036,7 +1020,7 @@ function renderSubjects(){
                 </div>
             </div>
 
-            <div class="chapter-list" id="list-${classNo}-${subject.replace(/\s/g,'')}"></div>
+            <div class="chapter-list"></div>
         `;
 
         container.appendChild(box);
@@ -1070,11 +1054,6 @@ function renderSubjects(){
 
 }
 
-
-/* =========================================================
-   CHECKBOX
-========================================================= */
-
 function toggleChapter(encodedKey){
 
     const key = decodeURIComponent(encodedKey);
@@ -1086,11 +1065,6 @@ function toggleChapter(encodedKey){
     renderSubjects();
     updateStats();
 }
-
-
-/* =========================================================
-   STATS
-========================================================= */
 
 function updateStats(){
 
@@ -1130,11 +1104,6 @@ function updateStats(){
     document.getElementById("overallBar").style.width = percent+"%";
 }
 
-
-/* =========================================================
-   THEME
-========================================================= */
-
 function toggleTheme(){
 
     document.body.classList.toggle("light");
@@ -1147,20 +1116,10 @@ function toggleTheme(){
         light ? "☀️ Light" : "🌙 Dark";
 }
 
-
-/* =========================================================
-   RESOURCE
-========================================================= */
-
 function openResource(url){
 
-    window.open(url,"_blank");
+    window.open(url,"_blank","noopener,noreferrer");
 }
-
-
-/* =========================================================
-   LOAD SAVED DATA
-========================================================= */
 
 function loadData(){
 
@@ -1194,14 +1153,10 @@ function loadData(){
     updateApp();
 }
 
-
-/* =========================================================
-   START
-========================================================= */
-
 loadData();
 
 </script>
 
 </body>
 </html>
+```

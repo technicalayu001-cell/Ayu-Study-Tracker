@@ -835,6 +835,87 @@ padding:10px;
 
 }
 
+
+/* =========================
+   AYU ONLINE RESOURCES
+========================= */
+.resource-controls{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+  margin-bottom:15px;
+}
+.resource-admin-bar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:15px;
+}
+.secondary-btn{
+  background:var(--card2);
+  color:var(--text);
+  border:1px solid var(--border);
+  padding:11px 15px;
+  border-radius:11px;
+  font-weight:bold;
+  cursor:pointer;
+}
+.secondary-btn:hover{border-color:var(--primary);}
+.online-resource-list{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+.online-resource-item{
+  background:var(--card2);
+  border:1px solid var(--border);
+  border-radius:15px;
+  padding:16px;
+}
+.online-resource-item h3{margin-bottom:6px;}
+.online-resource-item p{
+  color:var(--muted);
+  margin:4px 0;
+  font-size:14px;
+}
+.online-resource-item a{
+  display:inline-block;
+  margin-top:10px;
+  background:var(--primary);
+  color:#032238;
+  text-decoration:none;
+  padding:9px 13px;
+  border-radius:9px;
+  font-weight:bold;
+}
+.admin-panel{
+  display:none;
+  margin-top:15px;
+  padding:18px;
+  border:1px solid var(--border);
+  border-radius:16px;
+  background:var(--card2);
+}
+.admin-panel.show{display:block;}
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+}
+.admin-status{
+  margin-top:10px;
+  color:var(--muted);
+  font-size:14px;
+}
+#resourceMessage{
+  margin-top:12px;
+  color:var(--muted);
+}
+@media(max-width:800px){
+  .resource-controls,.admin-grid,.online-resource-list{grid-template-columns:1fr;}
+}
+
 </style>
 
 </head>
@@ -1353,6 +1434,118 @@ Open NCERT Library
 </section>
 
 
+
+<!-- =========================
+     AYU ONLINE RESOURCES
+========================= -->
+<section class="card" id="ayuResources">
+  <h2>📚 Ayu Resources</h2>
+
+  <div class="tip" style="margin-bottom:18px;">
+    Notes, PDFs and study materials added by Ayu. Choose your class, subject and chapter to find resources.
+  </div>
+
+  <div class="resource-controls">
+    <div>
+      <label>Class</label>
+      <select id="onlineClass">
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Subject</label>
+      <select id="onlineSubject">
+        <option value="all">All Subjects</option>
+      </select>
+    </div>
+
+    <div>
+      <label>Chapter</label>
+      <select id="onlineChapter">
+        <option value="all">All Chapters</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="resource-admin-bar">
+    <button class="secondary-btn" id="refreshOnlineResources">🔄 Refresh Resources</button>
+    <button class="secondary-btn" id="adminLoginBtn">🔐 Admin Login</button>
+    <button class="secondary-btn" id="adminLogoutBtn" style="display:none;">🚪 Logout</button>
+  </div>
+
+  <div id="resourceMessage"></div>
+  <div id="onlineResourceList" class="online-resource-list"></div>
+
+  <div id="adminLoginPanel" class="admin-panel">
+    <h3>🔐 Ayu Admin Login</h3>
+    <p class="admin-status">Only the authorised Ayu admin account can publish resources.</p>
+
+    <div class="admin-grid" style="margin-top:12px;">
+      <div>
+        <label>Email</label>
+        <input type="email" id="adminEmail" placeholder="Admin email">
+      </div>
+      <div>
+        <label>Password</label>
+        <input type="password" id="adminPassword" placeholder="Admin password">
+      </div>
+    </div>
+
+    <button class="primary" id="adminSignInBtn">Login</button>
+  </div>
+
+  <div id="adminUploadPanel" class="admin-panel">
+    <h3>➕ Add Resource</h3>
+    <p class="admin-status">You are logged in as the Ayu admin. Select the chapter, add a title and upload the file.</p>
+
+    <div class="admin-grid" style="margin-top:12px;">
+      <div>
+        <label>Class</label>
+        <select id="adminClass">
+          <option value="9">Class 9</option>
+          <option value="10">Class 10</option>
+        </select>
+      </div>
+
+      <div>
+        <label>Subject</label>
+        <select id="adminSubject"></select>
+      </div>
+
+      <div>
+        <label>Chapter</label>
+        <select id="adminChapter"></select>
+      </div>
+
+      <div>
+        <label>Resource Type</label>
+        <select id="adminResourceType">
+          <option value="PDF">📕 PDF</option>
+          <option value="Notes">📄 Notes</option>
+          <option value="Questions">📝 Questions</option>
+          <option value="Other">📎 Other</option>
+        </select>
+      </div>
+
+      <div style="grid-column:1/-1;">
+        <label>Resource Title</label>
+        <input id="adminTitle" type="text" placeholder="e.g. Chapter 1 Notes">
+      </div>
+
+      <div style="grid-column:1/-1;">
+        <label>File</label>
+        <input id="adminFile" type="file" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt">
+        <p class="admin-status">Maximum recommended file size: 20 MB.</p>
+      </div>
+    </div>
+
+    <button class="primary" id="publishResourceBtn">📤 Publish Resource</button>
+  </div>
+</section>
+
+
 <!-- STUDY TIPS -->
 
 <section class="card">
@@ -1416,6 +1609,8 @@ Made for smart and organised study preparation.
 
 </footer>
 
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
 
@@ -2698,6 +2893,372 @@ updateApp();
 
 
 loadData();
+
+
+/* =====================================================
+   AYU ONLINE RESOURCES - SUPABASE
+===================================================== */
+
+const SUPABASE_URL = "https://khzqkishctcfijmideta.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_H42p8XSZjaP19TYQrrTvlw_9E9MlkUY";
+const AYU_ADMIN_UID = "8ea67b68-3b99-4101-b053-a4a7ccf58960";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_PUBLISHABLE_KEY
+);
+
+function getOnlineClass(){
+  return Number(document.getElementById("onlineClass").value);
+}
+
+function fillOnlineSubjects(){
+  const classNo = getOnlineClass();
+  const ids = ["onlineSubject","adminSubject"];
+
+  ids.forEach(id=>{
+    const select = document.getElementById(id);
+    if(!select) return;
+
+    const current = select.value;
+    select.innerHTML = "";
+
+    if(id === "onlineSubject"){
+      const all = document.createElement("option");
+      all.value = "all";
+      all.textContent = "All Subjects";
+      select.appendChild(all);
+    }
+
+    Object.keys(syllabus[classNo]).forEach(subject=>{
+      const option = document.createElement("option");
+      option.value = subject;
+      option.textContent = subject;
+      select.appendChild(option);
+    });
+
+    if([...select.options].some(o=>o.value===current)){
+      select.value = current;
+    }
+  });
+
+  fillOnlineChapters();
+  fillAdminChapters();
+}
+
+function fillOnlineChapters(){
+  const classNo = getOnlineClass();
+  const subject = document.getElementById("onlineSubject").value;
+  const select = document.getElementById("onlineChapter");
+
+  select.innerHTML = "";
+
+  const all = document.createElement("option");
+  all.value = "all";
+  all.textContent = "All Chapters";
+  select.appendChild(all);
+
+  const subjects = subject === "all"
+    ? Object.keys(syllabus[classNo])
+    : [subject];
+
+  const seen = new Set();
+
+  subjects.forEach(sub=>{
+    syllabus[classNo][sub].chapters.forEach(ch=>{
+      if(seen.has(ch)) return;
+      seen.add(ch);
+
+      const option = document.createElement("option");
+      option.value = ch;
+      option.textContent = ch;
+      select.appendChild(option);
+    });
+  });
+}
+
+function fillAdminChapters(){
+  const classNo = Number(document.getElementById("adminClass").value);
+  const subject = document.getElementById("adminSubject").value;
+  const select = document.getElementById("adminChapter");
+
+  select.innerHTML = "";
+
+  if(!subject || !syllabus[classNo] || !syllabus[classNo][subject]) return;
+
+  syllabus[classNo][subject].chapters.forEach(ch=>{
+    const option = document.createElement("option");
+    option.value = ch;
+    option.textContent = ch;
+    select.appendChild(option);
+  });
+}
+
+function setResourceMessage(message){
+  document.getElementById("resourceMessage").textContent = message;
+}
+
+async function loadOnlineResources(){
+  const list = document.getElementById("onlineResourceList");
+  list.innerHTML = "";
+  setResourceMessage("Loading resources...");
+
+  const className = String(getOnlineClass());
+  const subject = document.getElementById("onlineSubject").value;
+  const chapter = document.getElementById("onlineChapter").value;
+
+  let query = supabaseClient
+    .from("resources")
+    .select("*")
+    .eq("class_name", className)
+    .order("created_at", {ascending:false});
+
+  if(subject !== "all") query = query.eq("subject", subject);
+  if(chapter !== "all") query = query.eq("chapter", chapter);
+
+  const {data, error} = await query;
+
+  if(error){
+    setResourceMessage("⚠️ Could not load resources. Please try again.");
+    console.error(error);
+    return;
+  }
+
+  if(!data || data.length === 0){
+    setResourceMessage("No resources added for this selection yet.");
+    return;
+  }
+
+  setResourceMessage(data.length + " resource" + (data.length === 1 ? "" : "s") + " found.");
+
+  data.forEach(item=>{
+    const card = document.createElement("div");
+    card.className = "online-resource-item";
+
+    const safeType = item.resource_type || "Resource";
+    card.innerHTML = `
+      <h3>${escapeResourceText(item.title)}</h3>
+      <p>📚 ${escapeResourceText(item.subject)}</p>
+      <p>📖 ${escapeResourceText(item.chapter)}</p>
+      <p>🏷️ ${escapeResourceText(safeType)}</p>
+      <a href="${item.file_url}" target="_blank" rel="noopener noreferrer">📥 Open Resource</a>
+    `;
+
+    list.appendChild(card);
+  });
+}
+
+function escapeResourceText(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+async function updateAdminUI(){
+  const {data:{session}} = await supabaseClient.auth.getSession();
+  const isAdmin = !!session && session.user && session.user.id === AYU_ADMIN_UID;
+
+  document.getElementById("adminLoginBtn").style.display = isAdmin ? "none" : "inline-block";
+  document.getElementById("adminLogoutBtn").style.display = isAdmin ? "inline-block" : "none";
+  document.getElementById("adminLoginPanel").classList.toggle("show", false);
+  document.getElementById("adminUploadPanel").classList.toggle("show", isAdmin);
+
+  if(isAdmin){
+    document.getElementById("adminClass").value = getOnlineClass();
+    fillAdminSubjectsFromClass();
+    setResourceMessage("✅ Admin logged in. You can add resources below.");
+  }
+}
+
+function fillAdminSubjectsFromClass(){
+  const classNo = Number(document.getElementById("adminClass").value);
+  const select = document.getElementById("adminSubject");
+  const current = select.value;
+
+  select.innerHTML = "";
+
+  Object.keys(syllabus[classNo]).forEach(subject=>{
+    const option = document.createElement("option");
+    option.value = subject;
+    option.textContent = subject;
+    select.appendChild(option);
+  });
+
+  if([...select.options].some(o=>o.value===current)){
+    select.value = current;
+  }
+
+  fillAdminChapters();
+}
+
+async function loginAyuAdmin(){
+  const email = document.getElementById("adminEmail").value.trim();
+  const password = document.getElementById("adminPassword").value;
+
+  if(!email || !password){
+    setResourceMessage("Please enter the admin email and password.");
+    return;
+  }
+
+  setResourceMessage("Logging in...");
+
+  const {data, error} = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if(error){
+    setResourceMessage("❌ Login failed. Check the email/password.");
+    console.error(error);
+    return;
+  }
+
+  if(!data.user || data.user.id !== AYU_ADMIN_UID){
+    await supabaseClient.auth.signOut();
+    setResourceMessage("❌ This account is not authorised as the Ayu admin.");
+    return;
+  }
+
+  document.getElementById("adminEmail").value = "";
+  document.getElementById("adminPassword").value = "";
+  document.getElementById("adminLoginPanel").classList.remove("show");
+
+  await updateAdminUI();
+}
+
+async function logoutAyuAdmin(){
+  await supabaseClient.auth.signOut();
+  document.getElementById("adminUploadPanel").classList.remove("show");
+  document.getElementById("adminLogoutBtn").style.display = "none";
+  document.getElementById("adminLoginBtn").style.display = "inline-block";
+  setResourceMessage("You have been logged out.");
+}
+
+async function publishAyuResource(){
+  const {data:{session}} = await supabaseClient.auth.getSession();
+
+  if(!session || session.user.id !== AYU_ADMIN_UID){
+    setResourceMessage("❌ Please log in as the Ayu admin first.");
+    return;
+  }
+
+  const classNo = Number(document.getElementById("adminClass").value);
+  const subject = document.getElementById("adminSubject").value;
+  const chapter = document.getElementById("adminChapter").value;
+  const type = document.getElementById("adminResourceType").value;
+  const title = document.getElementById("adminTitle").value.trim();
+  const file = document.getElementById("adminFile").files[0];
+
+  if(!subject || !chapter || !title || !file){
+    setResourceMessage("⚠️ Please fill all fields and select a file.");
+    return;
+  }
+
+  if(file.size > 20 * 1024 * 1024){
+    setResourceMessage("⚠️ File is larger than 20 MB. Please choose a smaller file.");
+    return;
+  }
+
+  const safeName = file.name
+    .replace(/[^a-zA-Z0-9._-]/g, "_")
+    .replace(/_+/g, "_");
+
+  const filePath =
+    "class-" + classNo +
+    "/" + encodeURIComponent(subject) +
+    "/" + encodeURIComponent(chapter) +
+    "/" + Date.now() + "-" + safeName;
+
+  setResourceMessage("Uploading file...");
+
+  const {error:uploadError} = await supabaseClient
+    .storage
+    .from("Resource")
+    .upload(filePath, file, {
+      cacheControl: "3600",
+      upsert: false
+    });
+
+  if(uploadError){
+    setResourceMessage("❌ File upload failed. Check the Storage policies.");
+    console.error(uploadError);
+    return;
+  }
+
+  const {data:urlData} = supabaseClient
+    .storage
+    .from("Resource")
+    .getPublicUrl(filePath);
+
+  const fileUrl = urlData.publicUrl;
+
+  const {error:insertError} = await supabaseClient
+    .from("resources")
+    .insert({
+      class_name: String(classNo),
+      subject: subject,
+      chapter: chapter,
+      title: title,
+      resource_type: type,
+      file_path: filePath,
+      file_url: fileUrl
+    });
+
+  if(insertError){
+    await supabaseClient.storage.from("Resource").remove([filePath]);
+    setResourceMessage("❌ Resource details could not be saved.");
+    console.error(insertError);
+    return;
+  }
+
+  document.getElementById("adminTitle").value = "";
+  document.getElementById("adminFile").value = "";
+
+  setResourceMessage("✅ Resource published successfully.");
+  await loadOnlineResources();
+}
+
+document.getElementById("onlineClass").addEventListener("change", ()=>{
+  fillOnlineSubjects();
+  loadOnlineResources();
+});
+
+document.getElementById("onlineSubject").addEventListener("change", ()=>{
+  fillOnlineChapters();
+  loadOnlineResources();
+});
+
+document.getElementById("onlineChapter").addEventListener("change", loadOnlineResources);
+
+document.getElementById("refreshOnlineResources").addEventListener("click", loadOnlineResources);
+
+document.getElementById("adminLoginBtn").addEventListener("click", ()=>{
+  document.getElementById("adminLoginPanel").classList.toggle("show");
+});
+
+document.getElementById("adminSignInBtn").addEventListener("click", loginAyuAdmin);
+
+document.getElementById("adminLogoutBtn").addEventListener("click", logoutAyuAdmin);
+
+document.getElementById("adminClass").addEventListener("change", ()=>{
+  fillAdminSubjectsFromClass();
+});
+
+document.getElementById("adminSubject").addEventListener("change", fillAdminChapters);
+
+document.getElementById("publishResourceBtn").addEventListener("click", publishAyuResource);
+
+fillOnlineSubjects();
+fillAdminSubjectsFromClass();
+loadOnlineResources();
+updateAdminUI();
+
+supabaseClient.auth.onAuthStateChange(()=>{
+  updateAdminUI();
+});
 
 </script>
 
